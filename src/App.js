@@ -1,8 +1,32 @@
+import {AuthContext} from "./context/authContext";
+import {BrowserRouter} from "react-router-dom";
+import {useEffect, useState} from "react";
+import AppRouter from "./components/AppRouter";
+
 function App() {
+
+    const [isAuth, setIsAuth] = useState(false)
+    const [token, setToken] = useState('')
+    const [roles, setRoles] = useState([])
+
+    useEffect(() => {
+        if (localStorage.getItem('auth')) {
+            setIsAuth(true)
+            setToken(localStorage.getItem('token'))
+            setRoles(JSON.parse(localStorage.getItem('roles')))
+        }
+
+    }, [])
     return (
-        <div className="App">
-            <h1>Gym Web</h1>
-        </div>
+        <AuthContext.Provider value={{
+            isAuth, setIsAuth,
+            token, setToken,
+            roles, setRoles
+        }}>
+            <BrowserRouter>
+                <AppRouter/>
+            </BrowserRouter>
+        </AuthContext.Provider>
     );
 }
 
