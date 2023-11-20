@@ -17,19 +17,19 @@ const SignUp = () => {
     const signUpSchema = z
         .object({
             firstName: string()
-                .regex(new RegExp('^[a-zA-Z]+$'), 'Only latin letters')
-                .max(32, 'To long'),
+                .regex(new RegExp('^[a-zA-Z]+$'), 'Latin letters only')
+                .max(32, 'Too long'),
             lastName: string()
-                .regex(new RegExp('^[a-zA-Z]+$'), 'Only latin letters')
-                .max(32, 'To long'),
+                .regex(new RegExp('^[a-zA-Z]+$'), 'Latin letters only')
+                .max(32, 'Too long'),
             phoneNumber: string()
                 .regex(new RegExp('^\\+38\\(0[0-9]{2}\\)[0-9]{3}-[0-9]{2}-[0-9]{2}$'), 'Invalid phone number'),
             email: string()
                 .email('Invalid email address'),
             password: string()
                 .min(1, 'Password is required')
-                .min(8, 'Password must be more than 8 characters')
-                .max(32, 'Password must be less than 32 characters'),
+                .min(8, '8 characters are required')
+                .max(32, 'Too long'),
             confirmPassword: string()
         })
         .refine(data => data.password === data.confirmPassword, {
