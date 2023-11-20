@@ -80,12 +80,7 @@ const SignIn = () => {
                             />
                         </Grid>
                     </Grid>
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        fullWidth
-                        sx={{mt: 3}}
-                    >
+                    <Button type="submit" variant="contained" fullWidth sx={{mt: 3}}>
                         Sign In
                     </Button>
                     <Grid container sx={{mt: 1, mb: 3}}>
