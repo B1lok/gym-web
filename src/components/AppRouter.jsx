@@ -5,7 +5,7 @@ import {ADMIN_ROUTE, MAIN_ROUTE} from "../utils/constants";
 import {AuthContext} from "../context/authContext";
 
 const AppRouter = () => {
-    const {isAuth, roles, isLoading} = useContext(AuthContext)
+    const {roles, isLoading} = useContext(AuthContext)
 
     if (isLoading) return null;
 

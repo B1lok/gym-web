@@ -1,6 +1,6 @@
+export const MAIN_ROUTE = '/'
 export const SIGNIN_ROUTE = '/sign-in'
 export const SIGNUP_ROUTE = '/sign-up'
-export const MAIN_ROUTE = '/'
 export const ADMIN_ROUTE = '/admin'
 export const COACH_ROUTE = '/coach'
 export const USER_ROUTE = '/user'
