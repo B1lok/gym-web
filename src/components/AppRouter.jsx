@@ -9,48 +9,30 @@ const AppRouter = () => {
 
     if (isLoading) return null;
 
-    if (roles.includes('ROLE_ADMIN')) {
-        return (
-            <Routes>
-                <>
-                    {adminRoutes.map(route => <Route
-                        key={route.path} element={route.element} path={route.path}/>)}
+    const getRoutes = (routes) => (
+        <Routes>
+            <>
+                {routes.map(route => (
+                    <Route path={route.path} element={route.element} key={route.path}/>
+                ))}
+            </>
+            <Route path="*" element={<Navigate to={MAIN_ROUTE}/>}/>
+        </Routes>
+    )
 
-                    <Route path="*" element={<Navigate to={MAIN_ROUTE}/>}/>
-                </>
-            </Routes>
-        )
+    let routes;
+
+    if (roles.includes('ROLE_ADMIN')) {
+        routes = adminRoutes;
     } else if (roles.includes('ROLE_COACH')) {
-        return (
-            <Routes>
-                <>
-                    {coachRoutes.map(route => <Route
-                        key={route.path} element={route.element} path={route.path}/>)}
-                </>
-                <Route path="*" element={<Navigate to={MAIN_ROUTE}/>}/>
-            </Routes>
-        )
+        routes = coachRoutes;
     } else if (roles.includes('ROLE_USER')) {
-        return (
-            <Routes>
-                <>
-                    {userRoutes.map(route => <Route
-                        key={route.path} element={route.element} path={route.path}/>)}
-                </>
-                <Route path="*" element={<Navigate to={MAIN_ROUTE}/>}/>
-            </Routes>
-        )
+        routes = userRoutes;
     } else {
-        return (
-            <Routes>
-                <>
-                    {unauthenticatedRoutes.map(route => <Route
-                        key={route.path} element={route.element} path={route.path}/>)}
-                </>
-                <Route path="*" element={<Navigate to={MAIN_ROUTE}/>}/>
-            </Routes>
-        )
+        routes = unauthenticatedRoutes;
     }
+
+    return getRoutes(routes)
 };
 
 export default AppRouter;

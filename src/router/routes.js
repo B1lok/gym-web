@@ -3,20 +3,24 @@ import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import Main from "../pages/Main";
 
+export const defaultRoutes = [
+    {path: MAIN_ROUTE, element: <Main/>},
+]
+
 export const unauthenticatedRoutes = [
-    {path : MAIN_ROUTE, element: <Main/>},
-    {path : SIGNIN_ROUTE, element: <SignIn/>},
-    {path : SIGNUP_ROUTE, element: <SignUp/>}
+    ...defaultRoutes,
+    {path: SIGNIN_ROUTE, element: <SignIn/>},
+    {path: SIGNUP_ROUTE, element: <SignUp/>}
 ]
 
 export const userRoutes = [
-    {path : MAIN_ROUTE, element: <Main/>},
+    ...defaultRoutes,
 ]
 
 export const adminRoutes = [
-    {path: MAIN_ROUTE, element: <Main/>},
+    ...defaultRoutes,
 ]
 
 export const coachRoutes = [
-    {path: MAIN_ROUTE, element: <Main/>},
+    ...defaultRoutes,
 ]
