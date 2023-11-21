@@ -1,22 +1,47 @@
 import React, {useContext} from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
-import {unauthenticatedRoutes, userRoutes} from "../router/routes";
+import {adminRoutes, coachRoutes, unauthenticatedRoutes, userRoutes} from "../router/routes";
 import {MAIN_ROUTE} from "../utils/constants";
 import {AuthContext} from "../context/authContext";
 
 const AppRouter = () => {
+    const {roles, isLoading} = useContext(AuthContext)
 
-    const {isAuth} = useContext(AuthContext)
+    if (isLoading) return null;
 
-    return (
-        isAuth ?
+    if (roles.includes('ROLE_ADMIN')) {
+        return (
+            <Routes>
+                <>
+                    {adminRoutes.map(route => <Route
+                        key={route.path} element={route.element} path={route.path}/>)}
+
+                    <Route path="*" element={<Navigate to={MAIN_ROUTE}/>}/>
+                </>
+            </Routes>
+        )
+    } else if (roles.includes('ROLE_COACH')) {
+        return (
+            <Routes>
+                <>
+                    {coachRoutes.map(route => <Route
+                        key={route.path} element={route.element} path={route.path}/>)}
+                </>
+                <Route path="*" element={<Navigate to={MAIN_ROUTE}/>}/>
+            </Routes>
+        )
+    } else if (roles.includes('ROLE_USER')) {
+        return (
             <Routes>
                 <>
                     {userRoutes.map(route => <Route
                         key={route.path} element={route.element} path={route.path}/>)}
                 </>
                 <Route path="*" element={<Navigate to={MAIN_ROUTE}/>}/>
-            </Routes> :
+            </Routes>
+        )
+    } else {
+        return (
             <Routes>
                 <>
                     {unauthenticatedRoutes.map(route => <Route
@@ -24,8 +49,8 @@ const AppRouter = () => {
                 </>
                 <Route path="*" element={<Navigate to={MAIN_ROUTE}/>}/>
             </Routes>
-
-    );
+        )
+    }
 };
 
 export default AppRouter;
