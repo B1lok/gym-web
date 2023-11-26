@@ -4,3 +4,7 @@ export const SIGNUP_ROUTE = '/sign-up'
 export const ADMIN_ROUTE = '/admin'
 export const COACH_ROUTE = '/coach'
 export const USER_ROUTE = '/user'
+export const ADMIN_ROUTE_CUSTOMERS = ADMIN_ROUTE.concat('/customers')
+export const ADMIN_ROUTE_SUBSCRIPTIONS = ADMIN_ROUTE.concat('/subscriptions')
+export const ADMIN_ROUTE_STAFF = ADMIN_ROUTE.concat('/staff')
+export const COACH_ROUTE_RECORDS = COACH_ROUTE.concat('/records')
