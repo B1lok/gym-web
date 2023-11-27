@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
 import {useNavigate} from "react-router-dom";
-import {MAIN_ROUTE, SIGNIN_ROUTE} from "../utils/constants";
-import {AuthContext} from "../context/authContext";
-import AuthService from "../api/AuthService";
+import {MAIN_ROUTE, SIGNIN_ROUTE} from "../../utils/constants";
+import {AuthContext} from "../../context/authContext";
+import AuthService from "../../api/AuthService";
 import {jwtDecode} from "jwt-decode";
 import {Alert, Box, Button, Container, CssBaseline, Grid, Link, TextField, Typography} from '@mui/material';
 import {Controller, useForm} from "react-hook-form";
