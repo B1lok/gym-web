@@ -10,7 +10,7 @@ import {
 } from "../utils/constants";
 import SignIn from "../pages/sign-in/SignIn";
 import SignUp from "../pages/sign-up/SignUp";
-import Main from "../pages/Main/Main";
+import Main from "../pages/main/Main";
 import Faq from "../pages/faq/Faq";
 import Coaches from "../pages/coaches/Coaches";
 import Customers from "../pages/admin/customers/Customers";
