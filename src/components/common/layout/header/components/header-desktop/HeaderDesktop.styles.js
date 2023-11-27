@@ -4,6 +4,7 @@ export const headerContainer = {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    width: '100%',
     height: '64px',
     paddingLeft: '32px',
     paddingRight: '32px',
@@ -11,11 +12,6 @@ export const headerContainer = {
     // boxShadow: 'unset',
 }
 
-export const headerLinks = {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center',
-    width: 'fit-content',
+export const tabs = {
+
 }

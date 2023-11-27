@@ -20,10 +20,10 @@ const HeaderDesktop = ({isAuth}) => {
     }, []);
 
     return (
-        <AppBar elevation={2} sx={styles.headerContainer}>
+        <AppBar elevation={4} sx={styles.headerContainer}>
             <HeaderLogo/>
-            <Toolbar disableGutters sx={styles.headerLinks}>
-                <Tabs value={0}>
+            <Toolbar disableGutters>
+                <Tabs value={-1} sx={styles.tabs}>
                     {PAGES.map((page, index) => (
                         <Tab key={index} label={page.title} href={page.link}/>
                     ))}
