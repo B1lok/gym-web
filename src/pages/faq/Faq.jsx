@@ -6,10 +6,10 @@ import {Accordion, AccordionDetails, AccordionSummary, Box, Container, Typograph
 import {ArrowForwardIos} from "@mui/icons-material";
 
 const Faq = () => {
-    const [expanded, setExpanded] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(false);
 
     const handleAccordion = (panel) => (event, isExpanded) => {
-        setExpanded(isExpanded ? panel : false);
+        setIsExpanded(isExpanded ? panel : false);
     }
 
     return (
@@ -20,8 +20,14 @@ const Faq = () => {
                 </Typography>
                 <Box>
                     {FAQ_QUESTIONS.map((question, index) => (
-                        <Accordion key={index} expanded={expanded === `panel${index}`} onChange={handleAccordion(`panel${index}`)}>
-                            <AccordionSummary expandIcon={<ArrowForwardIos/>} sx={styles.acordionSummary}>
+                        <Accordion
+                            key={index}
+                            expanded={isExpanded === `panel${index}`}
+                            onChange={handleAccordion(`panel${index}`)}
+                            elevation={isExpanded === `panel${index}` ? 3 : 0}
+                            sx={styles.accordion}
+                        >
+                            <AccordionSummary expandIcon={<ArrowForwardIos/>} sx={styles.accordionSummary}>
                                 <Typography>{question.title}</Typography>
                             </AccordionSummary>
                             <AccordionDetails>

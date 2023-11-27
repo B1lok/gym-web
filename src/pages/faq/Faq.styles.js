@@ -6,7 +6,13 @@ export const container = {
     paddingBottom: '32px',
 }
 
-export const acordionSummary = {
+export const accordion = {
+    '&.Mui-expanded': {
+        borderRadius: '8px',
+    }
+}
+
+export const accordionSummary = {
     '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
         transform: 'rotate(90deg)',
     },
