@@ -21,4 +21,23 @@ export default class SubscriptionService {
             else if (e.response.status === 404) return {message: "Record not found"}
         }
     }
+
+    static async createSubscription(data) {
+        try {
+            return await axios.post(`${SUBSCRIPTION_API_URL}/createSubscription`, data, {headers})
+        } catch (e) {
+            if (!e.response) return {message: "No server response"}
+            else if (e.response.status === 403) return {message: "This operation is forbidden"}
+            else if (e.response.status === 404) return {message: "Record not found"}
+        }
+    }
+
+    static async updateSubscription(data) {
+        try {
+            return await axios.patch(`${SUBSCRIPTION_API_URL}/updateSubscription/${data.id}`, data, {headers})
+        } catch (e) {
+            if (!e.response) return {message: "No server response"}
+            else if (e.response.status === 403) return {message: "This operation is forbidden"}
+        }
+    }
 }
