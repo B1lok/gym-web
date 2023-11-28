@@ -16,11 +16,13 @@ import Coaches from "../pages/coaches/Coaches";
 import Customers from "../pages/admin/customers/Customers";
 import Records from "../pages/coach/records/Records";
 import Staff from "../pages/admin/staff/Staff";
+import Subscriptions from "../pages/Subscriptions";
 
 export const defaultRoutes = [
     {path: MAIN_ROUTE, element: <Main/>},
     {path: FAQ_ROUTE, element: <Faq/>},
     {path: COACHES_ROUTE, element: <Coaches/>},
+    {path: 'subscriptions', element: <Subscriptions/>},
 ]
 
 export const unauthenticatedRoutes = [
