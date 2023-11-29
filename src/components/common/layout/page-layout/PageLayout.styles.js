@@ -13,8 +13,11 @@ export const nav = {
 
 export const header = {
     width: '100%',
+    zIndex: 10,
 }
 
 export const footer = {
     width: '100%',
+    marginTop: 'auto',
+    zIndex: 10,
 }

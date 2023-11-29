@@ -17,41 +17,47 @@ import SignUp from "../pages/sign-up/SignUp";
 import Main from "../pages/main/Main";
 import Faq from "../pages/faq/Faq";
 import Coaches from "../pages/coaches/Coaches";
-import Customers from "../pages/admin/customers/Customers";
-import Records from "../pages/coach/records/Records";
-import Staff from "../pages/admin/staff/Staff";
-import Dashboard from "../pages/admin/dashboard/Dashboard";
+import Profile from "../pages/profile/Profile";
 import MySubscriptions from "../pages/user/mySubscriptions/MySubscriptions";
+import Records from "../pages/coach/records/Records";
+import Customers from "../pages/admin/customers/Customers";
+import Staff from "../pages/admin/staff/Staff";
 import Subscriptions from "../pages/admin/subscriptions/Subscriptions";
-import Profile from "../pages/user/profile/Profile";
+import Dashboard from "../pages/admin/dashboard/Dashboard";
 
 export const defaultRoutes = [
     {path: MAIN_ROUTE, element: <Main/>},
     {path: FAQ_ROUTE, element: <Faq/>},
     {path: COACHES_ROUTE, element: <Coaches/>},
+]
+
+export const authenticatedRoutes = [
     {path: PROFILE_ROUTE, element: <Profile/>},
 ]
 
 export const unauthenticatedRoutes = [
     ...defaultRoutes,
     {path: SIGNIN_ROUTE, element: <SignIn/>},
-    {path: SIGNUP_ROUTE, element: <SignUp/>}
+    {path: SIGNUP_ROUTE, element: <SignUp/>},
 ]
 
 export const userRoutes = [
+    ...authenticatedRoutes,
     ...defaultRoutes,
     {path: PROFILE_ROUTE_SUBSCRIPTIONS, element: <MySubscriptions/>},
 ]
 
 export const adminRoutes = [
+    ...authenticatedRoutes,
     ...defaultRoutes,
     {path: ADMIN_ROUTE_CUSTOMERS, element: <Customers/>},
-    {path: ADMIN_ROUTE_SUBSCRIPTIONS, element: <Subscriptions/>},
-    {path: ADMIN_ROUTE_STAFF, element: <Staff/>},
     {path: ADMIN_ROUTE_DASHBOARD, element: <Dashboard/>},
+    {path: ADMIN_ROUTE_STAFF, element: <Staff/>},
+    {path: ADMIN_ROUTE_SUBSCRIPTIONS, element: <Subscriptions/>},
 ]
 
 export const coachRoutes = [
+    ...authenticatedRoutes,
     ...defaultRoutes,
     {path: COACH_ROUTE_RECORDS, element: <Records/>},
 ]
