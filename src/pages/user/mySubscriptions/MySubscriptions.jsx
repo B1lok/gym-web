@@ -4,7 +4,6 @@ import UserService from "../../../api/UserService";
 import {Box, Button, Grid} from "@mui/material";
 import {Add} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
-import {PROFILE_ROUTE_BUY_SUBSCRIPTION} from "../../../utils/constants";
 import UserSubscriptionCard from "./components/UserSubscriptionCard";
 
 const MySubscriptions = () => {
@@ -23,7 +22,7 @@ const MySubscriptions = () => {
     return (
         <Box m="20px" sx={{textAlign: 'center'}}>
             <h1>My Subscriptions</h1>
-            <Button size="large" onClick={() => navigate(PROFILE_ROUTE_BUY_SUBSCRIPTION)} variant="contained"
+            <Button size="large" variant="contained"
                     color="success"
                     sx={{marginTop: '15px'}}>
                 Buy new subscription

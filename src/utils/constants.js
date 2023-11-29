@@ -5,7 +5,6 @@ export const COACHES_ROUTE = '/coaches'
 export const FAQ_ROUTE = '/faq'
 export const PROFILE_ROUTE = '/profile'
 export const PROFILE_ROUTE_SUBSCRIPTIONS = PROFILE_ROUTE.concat('/mySubscriptions')
-export const PROFILE_ROUTE_BUY_SUBSCRIPTION = PROFILE_ROUTE.concat('/buySubscription')
 export const ADMIN_ROUTE = '/admin'
 export const COACH_ROUTE = '/coach'
 export const ADMIN_ROUTE_CUSTOMERS = ADMIN_ROUTE.concat('/customers')

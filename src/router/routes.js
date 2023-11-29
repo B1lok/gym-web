@@ -7,7 +7,7 @@ import {
     COACHES_ROUTE,
     FAQ_ROUTE,
     MAIN_ROUTE,
-    PROFILE_ROUTE_BUY_SUBSCRIPTION,
+    PROFILE_ROUTE,
     PROFILE_ROUTE_SUBSCRIPTIONS,
     SIGNIN_ROUTE,
     SIGNUP_ROUTE
@@ -22,13 +22,14 @@ import Records from "../pages/coach/records/Records";
 import Staff from "../pages/admin/staff/Staff";
 import Dashboard from "../pages/admin/dashboard/Dashboard";
 import MySubscriptions from "../pages/user/mySubscriptions/MySubscriptions";
-import BuySubscription from "../pages/user/buySubscription/BuySubscription";
 import Subscriptions from "../pages/admin/subscriptions/Subscriptions";
+import Profile from "../pages/user/profile/Profile";
 
 export const defaultRoutes = [
     {path: MAIN_ROUTE, element: <Main/>},
     {path: FAQ_ROUTE, element: <Faq/>},
     {path: COACHES_ROUTE, element: <Coaches/>},
+    {path: PROFILE_ROUTE, element: <Profile/>},
 ]
 
 export const unauthenticatedRoutes = [
@@ -40,7 +41,6 @@ export const unauthenticatedRoutes = [
 export const userRoutes = [
     ...defaultRoutes,
     {path: PROFILE_ROUTE_SUBSCRIPTIONS, element: <MySubscriptions/>},
-    {path: PROFILE_ROUTE_BUY_SUBSCRIPTION, element: <BuySubscription/>},
 ]
 
 export const adminRoutes = [
