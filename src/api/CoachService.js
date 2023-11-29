@@ -7,6 +7,9 @@ const headers = {
     'Authorization': 'Bearer '.concat(token)
 }
 export default class CoachService {
+    static async getAllCoaches() {
+        return await axios.get(`${COACH_API_URL}/getAll`)
+    }
 
     static async getAllMyRecords() {
         return await axios.get(`${COACH_API_URL}/records/getMyRecords`, {headers})

@@ -42,4 +42,13 @@ export default class UserService {
         }
     }
 
+    static async purchaseSubscription(data, subscriptionId) {
+        try {
+            return await axios.post(`${USER_API_URL}/buySubscription/${subscriptionId}`, data, {headers})
+        } catch (e) {
+            if (!e.response) return {message: "No server response"}
+            else if (e.response.status === 403) return {message: "You already have this type of subscription"}
+        }
+    }
+
 }
