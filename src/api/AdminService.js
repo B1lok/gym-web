@@ -66,6 +66,10 @@ export default class AdminService {
         }
     }
 
+    static async getStatistic() {
+        return await axios.get(`${ADMIN_API_URL}/getStatistic`, {headers})
+    }
+
     static async getAllAdmins() {
         return await axios.get(`${ADMIN_API_URL}/getAdmins`, {headers})
     }
