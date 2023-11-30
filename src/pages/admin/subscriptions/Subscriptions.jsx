@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import * as styles from './components/Subscriptions.styles'
+import * as styles from './Subscriptions.styles'
 import {useFetching} from "../../../hooks/useFetching";
 import SubscriptionService from "../../../api/SubscriptionService";
 import PageLayout from "../../../components/common/layout/page-layout/PageLayout";
@@ -31,6 +31,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {string, z} from "zod";
 import SubscriptionCard from "./components/SubscriptionCard";
 import {Add} from "@mui/icons-material";
+import Sidebar from "../../../components/common/layout/sidebar/Sidebar";
 
 const Subscriptions = () => {
     const [subscriptions, setSubscriptions] = useState([])
@@ -138,9 +139,9 @@ const Subscriptions = () => {
     }, []);
 
     return (
-        <PageLayout>
-            <Box sx={styles.layout}>
-                <Typography variant="h2" align="center" gutterBottom>Subscriptions</Typography>
+        <PageLayout hasHeader hasFooter>
+            <Sidebar hasHeader hasFooter sx={styles.main}>
+                <Typography variant="h3" align="center" gutterBottom>Subscriptions</Typography>
                 {errorButtonVisible && (
                     <Alert
                         sx={{
@@ -199,72 +200,99 @@ const Subscriptions = () => {
                         <Stack spacing={2}>
                             <FormControl variant="standard" required>
                                 <InputLabel id="type-label">Type</InputLabel>
-                                <Select
-                                    {...register('subscriptionType')}
-                                    defaultValue={defaultValues.type}
-                                    error={Boolean(errors.type)}
-                                    id="type"
-                                    labelId="type-label"
-                                    label="Type"
-                                >
-                                    <MenuItem value={"GYM"}>Gym</MenuItem>
-                                    <MenuItem value={"BOX"}>Box</MenuItem>
-                                    <MenuItem value={"SWIMMING_POOL"}>Pool</MenuItem>
-                                </Select>
+                                <Controller
+                                    name="subscriptionType"
+                                    control={control}
+                                    defaultValue={defaultValues.subscriptionType}
+                                    render={({field}) => (
+                                        <Select
+                                            {...field}
+                                            error={Boolean(errors.subscriptionType)}
+                                            id="type"
+                                            labelId="type-label"
+                                            label="Type"
+                                        >
+                                            <MenuItem value={"GYM"}>Gym</MenuItem>
+                                            <MenuItem value={"BOX"}>Box</MenuItem>
+                                            <MenuItem value={"SWIMMING_POOL"}>Pool</MenuItem>
+                                        </Select>
+                                    )}
+                                />
                                 <FormHelperText>{errors.subscriptionType?.message}</FormHelperText>
                             </FormControl>
                             <FormControl variant="standard" required>
                                 <InputLabel id="duration-label">Duration</InputLabel>
-                                <Select
-                                    {...register('durationInDays')}
+                                <Controller
+                                    name="durationInDays"
+                                    control={control}
                                     defaultValue={defaultValues.durationInDays}
-                                    error={Boolean(errors.durationInDays)}
-                                    id="duration"
-                                    labelId="duration-label"
-                                    label="Duration"
-                                >
-                                    <MenuItem value={31}>Month</MenuItem>
-                                    <MenuItem value={93}>Tree months</MenuItem>
-                                    <MenuItem value={365}>Year</MenuItem>
-                                </Select>
+                                    render={({field}) => (
+                                        <Select
+                                            {...field}
+                                            error={Boolean(errors.durationInDays)}
+                                            id="duration"
+                                            labelId="duration-label"
+                                            label="Duration"
+                                        >
+                                            <MenuItem value={31}>Month</MenuItem>
+                                            <MenuItem value={93}>Tree months</MenuItem>
+                                            <MenuItem value={365}>Year</MenuItem>
+                                        </Select>
+                                    )}
+                                />
                                 <FormHelperText>{errors.durationInDays?.message}</FormHelperText>
                             </FormControl>
                             <FormControl variant="standard" required>
                                 <InputLabel id="visits-label">Visits</InputLabel>
-                                <Select
-                                    {...register('visitsAmount')}
+                                <Controller
+                                    name="visitsAmount"
+                                    control={control}
                                     defaultValue={defaultValues.visitsAmount}
-                                    error={Boolean(errors.visitsAmount)}
-                                    id="visits"
-                                    labelId="visits-label"
-                                    label="Visits"
-                                >
-                                    <MenuItem value={3}>3</MenuItem>
-                                    <MenuItem value={5}>5</MenuItem>
-                                    <MenuItem value={8}>8</MenuItem>
-                                    <MenuItem value={10}>10</MenuItem>
-                                    <MenuItem value={12}>12</MenuItem>
-                                    <MenuItem value={-1}>UNLIMITED</MenuItem>
-                                </Select>
+                                    render={({field}) => (
+                                        <Select
+                                            {...field}
+                                            error={Boolean(errors.visitsAmount)}
+                                            id="visits"
+                                            labelId="visits-label"
+                                            label="Visits"
+                                        >
+                                            <MenuItem value={3}>3</MenuItem>
+                                            <MenuItem value={5}>5</MenuItem>
+                                            <MenuItem value={8}>8</MenuItem>
+                                            <MenuItem value={10}>10</MenuItem>
+                                            <MenuItem value={12}>12</MenuItem>
+                                            <MenuItem value={-1}>UNLIMITED</MenuItem>
+                                        </Select>
+                                    )}
+                                />
                                 <FormHelperText>{errors.visitsAmount?.message}</FormHelperText>
                             </FormControl>
-                            <TextField
-                                {...register('price')}
-                                error={Boolean(errors.price)}
-                                helperText={errors.price?.message}
-                                id="price"
-                                label="Price"
-                                type="number"
-                                required
-                                variant="standard"
+                            <Controller
+                                name="price"
+                                control={control}
+                                defaultValue={defaultValues.price}
+                                render={({field}) => (
+                                    <TextField
+                                        {...field}
+                                        error={Boolean(errors.price)}
+                                        helperText={errors.price?.message}
+                                        id="price"
+                                        label="Price"
+                                        type="number"
+                                        required
+                                        variant="standard"
+                                    />
+                                )}
                             />
                             <FormControlLabel
                                 control={
                                     <Controller
                                         name="check"
                                         control={control}
-                                        defaultValue={true}
-                                        render={({field}) => <Checkbox {...register('withCoach')}/>}
+                                        render={({field}) => (
+                                            <Checkbox {...register('withCoach')}
+                                                      defaultChecked={defaultValues.withCoach}/>
+                                        )}
                                     />
                                 }
                                 label="Coach"
@@ -400,7 +428,7 @@ const Subscriptions = () => {
                         <Button onClick={handleSubscriptionRemoval}>Agree</Button>
                     </DialogActions>
                 </Dialog>
-            </Box>
+            </Sidebar>
         </PageLayout>
     );
 };

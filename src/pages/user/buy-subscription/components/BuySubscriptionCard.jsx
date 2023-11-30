@@ -1,4 +1,5 @@
 import React from 'react';
+import * as styles from './BuySubscriptionCard.styles';
 import {Button, Card, CardActions, CardContent, Typography} from "@mui/material";
 import {Shop} from "@mui/icons-material";
 

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import * as styles from './MySubscriptions.styles';
 import {useFetching} from "../../../hooks/useFetching";
 import UserService from "../../../api/UserService";
 import {Box, Button, Grid} from "@mui/material";

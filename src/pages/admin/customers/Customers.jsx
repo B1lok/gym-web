@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {DataGrid, GridCloseIcon} from "@mui/x-data-grid";
+import * as styles from './Customers.styles';
+import {CUSTOMER_COLUMNS, USER_SUBSCRIPTION_COLUMNS, USER_TRAINING_COLUMNS} from "./constants";
 import {useFetching} from "../../../hooks/useFetching";
 import AdminService from "../../../api/AdminService";
+import Sidebar from "../../../components/common/layout/sidebar/Sidebar";
+import PageLayout from "../../../components/common/layout/page-layout/PageLayout";
 import {
     Alert,
-    Box,
     Button,
-    ButtonGroup,
     Dialog,
     DialogActions,
     DialogContent,
@@ -19,12 +20,10 @@ import {
     Select,
     Slide
 } from "@mui/material";
-import UserSubscriptionsGrid from "./components/UserSubscriptionsGrid";
-import UserTrainingsGrid from "./components/UserTrainingsGrid";
-import {AdminPanelSettings, Sports} from "@mui/icons-material";
+import {GridCloseIcon} from "@mui/x-data-grid";
+import MyTable from "../../../components/ui/my-table/MyTable";
 
 const Customers = () => {
-
     const [customers, setCustomers] = useState([])
     const [open, setOpen] = useState(false);
     const [adminDialogOpen, setAdminDialogOpen] = useState(false)
@@ -35,6 +34,7 @@ const Customers = () => {
     const [coachSpecialization, setCoachSpecialization] = useState('')
     const [errorButtonMessage, setErrorButtonMessage] = useState('')
     const [errorButtonVisible, setErrorButtonVisible] = useState(false)
+
     const handleClickOpen = async (id) => {
         await fetchCustomer(id)
         setOpen(true);
@@ -88,210 +88,118 @@ const Customers = () => {
         setCustomerTrainings(customerTrainings.data)
     })
 
-    const columns = [
-        {field: "id", headerName: "ID", width: 100},
-        {
-            field: "firstName",
-            headerName: "Name",
-            width: 200
-        },
-        {
-            field: "lastName",
-            headerName: "Last Name",
-            width: 250
-        },
-        {
-            field: "phoneNumber",
-            headerName: "Phone Number",
-            width: 250
-        },
-        {
-            field: "email",
-            headerName: "Email",
-            width: 250
-        },
-        {
-            field: 'information',
-            headerName: 'Details',
-            width: 150,
-            renderCell: ({row: {id}}) => {
-                return (
-                    <>
-                        <Button onClick={() => handleClickOpen(id)} fullWidth sx={{color: "#3da58a"}}>
-                            View Details
-                        </Button>
-                    </>
-                )
-            }
-        },
-        {
-            field: 'actions',
-            headerName: 'Give roles',
-            width: 250,
-            renderCell: ({row: {id}}) => {
-                return (
-                    <>
-                        <ButtonGroup
-                            disableElevation
-                            aria-label="Disabled elevation buttons"
-                        >
-                            <Button sx={{color: "#a4a9fc"}} onClick={() => {
-                                setSelectedCustomerId(id)
-                                setAdminDialogOpen(true)
-                            }}>
-                                Admin
-                                <AdminPanelSettings></AdminPanelSettings>
-                            </Button>
-                            <Button sx={{color: "#e99592"}} onClick={() => {
-                                setSelectedCustomerId(id)
-                                setCoachDialogOpen(true)
-                            }}>
-                                Coach
-                                <Sports></Sports>
-                            </Button>
-                        </ButtonGroup>
-                    </>
-                )
-            }
-        }
-    ]
-
     useEffect(() => {
         fetchCustomers()
     }, []);
 
     return (
-        <Box m="20px">
-            <Box m="40px 0 0 0" height="75vh" sx={{
-                "& .MuiDataGrid-root": {
-                    border: "none",
-                },
-                "& .MuiDataGrid-cell": {
-                    color: 'white',
-                    borderBottom: "none",
-                },
-                "& .name-column--cell": {
-                    color: "#94e2cd",
-                },
-                "& .MuiDataGrid-columnHeaders, .MuiDataGrid-columnTitles": {
-                    color: 'white',
-                    backgroundColor: "#3e4396",
-                    borderBottom: "none",
-                },
-                "& .MuiDataGrid-virtualScroller": {
-                    backgroundColor: "#1F2A40",
-                },
-                "& .MuiDataGrid-footerContainer, .MuiDataGrid-toolbar": {
-                    color: 'white',
-                    backgroundColor: "#3e4396",
-                },
-                "& .MuiCheckbox-root": {
-                    color: `#b7ebde !important`,
-                },
-            }}>
-                <DataGrid
+        <PageLayout hasHeader>
+            <Sidebar hasHeader sx={styles.main}>
+                <MyTable
                     rows={customers}
-                    columns={columns}
-                    checkboxSelection
-                    disableRowSelectionOnClick
+                    columns={CUSTOMER_COLUMNS(handleClickOpen, setSelectedCustomerId, setCoachDialogOpen, setAdminDialogOpen)}
+                    height="40vh"
                 />
-            </Box>
-            {errorButtonVisible && (
-                <Alert
-                    sx={{
-                        position: 'fixed',
-                        top: '20px',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        zIndex: 9999
-                    }}
-                    onClose={() => setErrorButtonVisible(false)}
-                    severity="error"
-                >
-                    {errorButtonMessage}
-                </Alert>)}
-            <Dialog open={open}
+                {errorButtonVisible && (
+                    <Alert
+                        onClose={() => setErrorButtonVisible(false)}
+                        severity="error"
+                        sx={styles.alert}
+                    >
+                        {errorButtonMessage}
+                    </Alert>)}
+                <Dialog
+                    open={open}
                     onClose={handleClose}
                     scroll='paper'
                     fullScreen
                     TransitionComponent={Slide}
-            >
-                <IconButton
-                    edge="start"
-                    color="inherit"
-                    onClick={handleClose}
-                    aria-label="close"
                 >
-                    <GridCloseIcon/>
-                </IconButton>
-                <DialogTitle id="scroll-dialog-title"
-                             sx={{textAlign: 'center', fontSize: '24px', color: '#3e4396', fontWeight: 'bold'}}>
-                    Customer Details
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText>Customer subscriptions</DialogContentText>
-                    <UserSubscriptionsGrid subscriptions={customerSubscriptions}></UserSubscriptionsGrid>
-                    <DialogContentText>Customer trainings</DialogContentText>
-                    <UserTrainingsGrid trainings={customerTrainings}></UserTrainingsGrid>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose}>Close</Button>
-                </DialogActions>
-            </Dialog>
-            <Dialog
-                open={adminDialogOpen}
-                onClose={() => setAdminDialogOpen(false)}
-                TransitionComponent={Slide}
-            >
-                <DialogTitle id="alert-dialog-title">
-                    Giving the admin role
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        Are you sure you want to grant the admin role to this user?
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => setAdminDialogOpen(false)}>Disagree</Button>
-                    <Button onClick={handleGivingAdminRole} autoFocus>
-                        Agree
-                    </Button>
-                </DialogActions>
-            </Dialog>
-            <Dialog
-                open={coachDialogOpen}
-                onClose={() => setCoachDialogOpen(false)}
-                TransitionComponent={Slide}
-                scroll='paper'
-            >
-                <DialogTitle id="alert-dialog-title">
-                    Select coach specialization
-                </DialogTitle>
-                <DialogContent>
-                    <FormControl fullWidth>
-                        <InputLabel id="select-label">Specialization</InputLabel>
-                        <Select
-                            labelId="select-label"
-                            id="demo-simple-select"
-                            label="Specialization"
-                            value={coachSpecialization}
-                            onChange={handleCoachSpecializationChange}
-                        >
-                            <MenuItem value={"GYM"}>Gym Coach</MenuItem>
-                            <MenuItem value={"SWIMMING_POOL"}>Swimming coach</MenuItem>
-                            <MenuItem value={"BOX"}>Box coach</MenuItem>
-                        </Select>
-                    </FormControl>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => setCoachDialogOpen(false)}>Disagree</Button>
-                    <Button onClick={handleGivingCoachRole} autoFocus>
-                        Give coach role
-                    </Button>
-                </DialogActions>
-            </Dialog>
-
-        </Box>
+                    <IconButton
+                        onClick={handleClose}
+                        aria-label="close"
+                        edge="start"
+                        color="inherit"
+                    >
+                        <GridCloseIcon/>
+                    </IconButton>
+                    <DialogTitle
+                        id="scroll-dialog-title"
+                        sx={styles.dialogTitle}>
+                        Customer Details
+                    </DialogTitle>
+                    <DialogContent sx={styles.dialogContentTables}>
+                        <DialogContentText mb={1}>Customer subscriptions</DialogContentText>
+                        <MyTable
+                            rows={customerSubscriptions}
+                            columns={USER_SUBSCRIPTION_COLUMNS}
+                            height="40vh"
+                        />
+                        <DialogContentText my={1}>Customer trainings</DialogContentText>
+                        <MyTable
+                            rows={customerTrainings}
+                            columns={USER_TRAINING_COLUMNS}
+                            height="40vh"
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose}>Close</Button>
+                    </DialogActions>
+                </Dialog>
+                <Dialog
+                    open={adminDialogOpen}
+                    onClose={() => setAdminDialogOpen(false)}
+                    TransitionComponent={Slide}
+                >
+                    <DialogTitle id="alert-dialog-title">
+                        Giving the admin role
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            Are you sure you want to grant the admin role to this user?
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() => setAdminDialogOpen(false)}>Disagree</Button>
+                        <Button onClick={handleGivingAdminRole} autoFocus>
+                            Agree
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+                <Dialog
+                    open={coachDialogOpen}
+                    onClose={() => setCoachDialogOpen(false)}
+                    TransitionComponent={Slide}
+                    scroll='paper'
+                >
+                    <DialogTitle id="alert-dialog-title">
+                        Select coach specialization
+                    </DialogTitle>
+                    <DialogContent dividers>
+                        <FormControl fullWidth>
+                            <InputLabel id="select-label">Specialization</InputLabel>
+                            <Select
+                                labelId="select-label"
+                                id="demo-simple-select"
+                                label="Specialization"
+                                value={coachSpecialization}
+                                onChange={handleCoachSpecializationChange}
+                            >
+                                <MenuItem value={"GYM"}>Gym</MenuItem>
+                                <MenuItem value={"BOX"}>Box</MenuItem>
+                                <MenuItem value={"SWIMMING_POOL"}>Pool</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </DialogContent>
+                    <DialogActions sx={styles.dialogActions}>
+                        <Button onClick={() => setCoachDialogOpen(false)}>Disagree</Button>
+                        <Button onClick={handleGivingCoachRole} autoFocus>
+                            Give coach role
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </Sidebar>
+        </PageLayout>
     );
 };
 

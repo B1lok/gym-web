@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
+import * as styles from './BuySubscription.styles';
 import {useFetching} from "../../../hooks/useFetching";
 import SubscriptionService from "../../../api/SubscriptionService";
-import {Box, Grid} from "@mui/material";
 import BuySubscriptionCard from "./components/BuySubscriptionCard";
+import {Box, Grid} from "@mui/material";
 
 const BuySubscription = () => {
     const [subscriptions, setSubscriptions] = useState([])

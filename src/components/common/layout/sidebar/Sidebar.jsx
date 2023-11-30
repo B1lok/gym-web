@@ -72,7 +72,7 @@ const Sidebar = ({hasHeader, hasFooter, sx, children}) => {
                 ))}
                 {hasFooter && <styles.SidebarDrawerSpacer/>}
             </styles.SidebarDrawer>
-            <Box component="main" sx={sx}>
+            <Box component="main" padding="32px" sx={sx}>
                 {children}
             </Box>
         </Box>
