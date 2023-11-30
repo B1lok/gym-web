@@ -5,11 +5,13 @@ import {Box, Button, Grid} from "@mui/material";
 import {Add} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
 import UserSubscriptionCard from "./components/UserSubscriptionCard";
+import BuySubscription from "./buySubscription/BuySubscription";
 
 const MySubscriptions = () => {
 
     const [subscriptions, setSubscriptions] = useState([])
     const navigate = useNavigate()
+    const [buySubscriptionDialogOpen, setBuySubscriptionDialogOpen] = useState(false)
     const [fetchSubscriptions, isLoading, subscriptionsError] = useFetching(async () => {
         const response = await UserService.getMySubscriptions()
         setSubscriptions(response.data)
@@ -23,7 +25,7 @@ const MySubscriptions = () => {
         <Box m="20px" sx={{textAlign: 'center'}}>
             <h1>My Subscriptions</h1>
             <Button size="large" variant="contained"
-                    color="success"
+                    color="success" onClick={() => setBuySubscriptionDialogOpen(true)}
                     sx={{marginTop: '15px'}}>
                 Buy new subscription
                 <Add sx={{marginLeft: '5px'}}></Add>
@@ -38,6 +40,8 @@ const MySubscriptions = () => {
                     </Grid>
                 ))}
             </Grid>
+            <BuySubscription dialogOpen={buySubscriptionDialogOpen} setDialogOpen={setBuySubscriptionDialogOpen}/>
+
         </Box>
     );
 };
