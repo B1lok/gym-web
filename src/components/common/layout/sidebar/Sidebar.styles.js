@@ -53,6 +53,7 @@ export const SidebarDrawer = styled(Drawer, {shouldForwardProp: (prop) => prop !
 export const sidebar = {
     zIndex: 1,
     display: 'flex',
+    maxWidth: '100%',
 }
 
 export const divider = (isSidebarOpened) => ({

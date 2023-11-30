@@ -12,7 +12,7 @@ import {
     Select,
     Stack
 } from "@mui/material";
-import * as styles from "../../../admin/subscriptions/components/Subscriptions.styles";
+import * as styles from "../../../admin/subscriptions/Subscriptions.styles";
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {LocalizationProvider, TimePicker} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
