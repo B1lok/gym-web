@@ -23,7 +23,7 @@ import Customers from "../pages/admin/customers/Customers";
 import Staff from "../pages/admin/staff/Staff";
 import Subscriptions from "../pages/admin/subscriptions/Subscriptions";
 import Dashboard from "../pages/admin/dashboard/Dashboard";
-import Profile from "../pages/user/profile/Profile";
+import Profile from "../pages/profile/Profile";
 
 export const defaultRoutes = [
     {path: MAIN_ROUTE, element: <Main/>},
