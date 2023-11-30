@@ -1,14 +1,10 @@
-export const layout = {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-    paddingTop: '32px',
+export const main = {
 }
 
 export const addIcon = {
     position: 'fixed',
-    bottom: '16px',
-    right: '16px',
+    bottom: `${64 + 4}px`,
+    right: '4px',
     '& .MuiSvgIcon-root': {fontSize: '4rem'},
 }
 
@@ -18,7 +14,8 @@ export const dialogContent = {
 
 export const actions = {
     display: 'flex',
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: '16px 32px',
+    justifyContent: 'space-evenly',
+    padding: '16px 24px',
 }

@@ -6,7 +6,7 @@ import {CreditCard, Person, Sell, SportsGymnastics} from "@mui/icons-material";
 const Statistics = ({numberOfCustomers, numberOfCoaches, overallSubscriptionsSold, subscriptionSoldThisMonth}) => {
 
     return (
-        <Grid container spacing={3} mt="20px">
+        <Grid container spacing={3}>
             <Grid item xs={12} sm={6} md={6} lg={6} xl={3}>
                 <Box
                     backgroundColor="#1F2A40"

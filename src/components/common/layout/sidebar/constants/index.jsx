@@ -1,5 +1,6 @@
 import {
     ADMIN_ROUTE_CUSTOMERS,
+    ADMIN_ROUTE_DASHBOARD,
     ADMIN_ROUTE_STAFF,
     ADMIN_ROUTE_SUBSCRIPTIONS,
     COACH_ROUTE_RECORDS,
@@ -22,7 +23,7 @@ export const COACH_TABS = [
 ]
 
 export const ADMIN_TABS = [
-    {title: 'Dashboard', link: ADMIN_ROUTE_SUBSCRIPTIONS, icon: <Dashboard/>},
+    {title: 'Dashboard', link: ADMIN_ROUTE_DASHBOARD, icon: <Dashboard/>},
     {title: 'Users', link: ADMIN_ROUTE_CUSTOMERS, icon: <Groups/>},
     {title: 'Staff', link: ADMIN_ROUTE_STAFF, icon: <Group/>},
     {title: 'Subscriptions', link: ADMIN_ROUTE_SUBSCRIPTIONS, icon: <Edit/>},
