@@ -66,16 +66,25 @@ const TrainingEnroll = ({
     }, [trainingDuration, training.trainingStart]);
 
     const handleTrainingDateChange = (date) => {
-        const today = dayjs();
+        const today = dayjs(userSubscription.purchaseDate).isBefore(dayjs()) ? dayjs() : dayjs(userSubscription.purchaseDate)
         const expirationDate = dayjs(userSubscription.expirationDate);
 
         const selectedDate = dayjs(date);
 
-        if ((selectedDate.isBefore(expirationDate) || selectedDate.isSame(expirationDate)) && selectedDate.isAfter(today)) {
+        if ((selectedDate.isBefore(expirationDate) || selectedDate.isSame(expirationDate)) && (selectedDate.isAfter(today) || selectedDate.isSame(today))) {
             setTraining({...training, trainingDate: selectedDate.format('YYYY-MM-DD')});
         } else {
             setTraining({...training, trainingDate: ''});
         }
+    }
+
+    const handleDialogClose = () => {
+        setTraining({
+            trainingDate: '',
+            trainingStart: '',
+            trainingEnd: ''
+        })
+        setTrainingEnrollDialogOpen(false)
     }
     const handleTrainingTimeChange = (time) => {
         const allowedStartTime = dayjs().set('hour', 8).set('minute', 0);
@@ -110,7 +119,7 @@ const TrainingEnroll = ({
                 component="form"
                 onSubmit={handleTrainingEnroll}
                 open={trainingEnrollDialogOpen}
-                onClose={() => setTrainingEnrollDialogOpen(false)}
+                onClose={handleDialogClose}
                 keepMounted
                 noValidate
                 fullWidth
@@ -122,7 +131,7 @@ const TrainingEnroll = ({
                             <DemoContainer components={['DatePicker']}>
                                 <DatePicker label="Select training day"
                                             onChange={handleTrainingDateChange}
-                                            minDate={dayjs().add(1, 'day')}
+                                            minDate={dayjs(userSubscription.purchaseDate).isBefore(dayjs()) ? dayjs() : dayjs(userSubscription.purchaseDate)}
                                             maxDate={dayjs(userSubscription.expirationDate)}
                                 />
                             </DemoContainer>
@@ -153,7 +162,7 @@ const TrainingEnroll = ({
                     </Stack>
                 </DialogContent>
                 <DialogActions sx={styles.actions}>
-                    <Button variant="outlined" onClick={() => setTrainingEnrollDialogOpen(false)}>Close</Button>
+                    <Button variant="outlined" onClick={handleDialogClose}>Close</Button>
                     <Button type="submit"
                             disabled={training.trainingDate === '' || training.trainingStart === '' || trainingDuration === ''}
                             variant="contained">
