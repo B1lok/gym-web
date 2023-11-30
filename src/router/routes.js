@@ -17,13 +17,13 @@ import SignUp from "../pages/sign-up/SignUp";
 import Main from "../pages/main/Main";
 import Faq from "../pages/faq/Faq";
 import Coaches from "../pages/coaches/Coaches";
-import Profile from "../pages/profile/Profile";
 import MySubscriptions from "../pages/user/mySubscriptions/MySubscriptions";
 import Records from "../pages/coach/records/Records";
 import Customers from "../pages/admin/customers/Customers";
 import Staff from "../pages/admin/staff/Staff";
 import Subscriptions from "../pages/admin/subscriptions/Subscriptions";
 import Dashboard from "../pages/admin/dashboard/Dashboard";
+import Profile from "../pages/user/profile/Profile";
 
 export const defaultRoutes = [
     {path: MAIN_ROUTE, element: <Main/>},
