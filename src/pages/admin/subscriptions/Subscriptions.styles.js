@@ -3,7 +3,7 @@ export const main = {
 
 export const addIcon = {
     position: 'fixed',
-    bottom: `${64+4}px`,
+    bottom: `${64 + 4}px`,
     right: '4px',
     '& .MuiSvgIcon-root': {fontSize: '4rem'},
 }

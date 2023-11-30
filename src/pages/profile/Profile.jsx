@@ -5,11 +5,6 @@ import Sidebar from "../../components/common/layout/sidebar/Sidebar";
 import {string, z} from "zod";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import AuthService from "../../api/AuthService";
-import {jwtDecode} from "jwt-decode";
-import {MAIN_ROUTE} from "../../utils/constants";
-import UserService from "../../api/UserService";
-import {Typography} from "@mui/material";
 
 const Profile = () => {
     const signUpSchema = z
@@ -30,10 +25,10 @@ const Profile = () => {
             //     .max(32, 'Too long'),
             // confirmPassword: string()
         })
-        // .refine(data => data.password === data.confirmPassword, {
-        //     message: "Passwords don't match",
-        //     path: ['confirmPassword']
-        // })
+    // .refine(data => data.password === data.confirmPassword, {
+    //     message: "Passwords don't match",
+    //     path: ['confirmPassword']
+    // })
 
     const {
         register,

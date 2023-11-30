@@ -1,5 +1,4 @@
 import React from 'react';
-import * as styles from './SubscriptionCard.styles';
 import {Button, Card, CardActions, CardContent, Typography} from "@mui/material";
 import {Delete, Update} from "@mui/icons-material";
 

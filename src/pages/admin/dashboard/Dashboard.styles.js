@@ -1,2 +1,1 @@
-export const main = {
-}
+export const main = {}

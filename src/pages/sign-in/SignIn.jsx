@@ -1,5 +1,4 @@
 import React, {useContext} from 'react';
-import * as styles from './SignIn.styles';
 import {useNavigate} from "react-router-dom";
 import {MAIN_ROUTE, SIGNUP_ROUTE} from "../../utils/constants";
 import {AuthContext} from "../../context/authContext";
