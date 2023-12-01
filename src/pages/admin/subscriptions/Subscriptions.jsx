@@ -116,6 +116,7 @@ const Subscriptions = () => {
             fetchSubscriptions()
             setIsSubscriptionOpened(false)
         }
+        reset()
     }
 
     const handleSubscriptionUpdate = async () => {
@@ -139,8 +140,8 @@ const Subscriptions = () => {
     }, []);
 
     return (
-        <PageLayout hasHeader hasFooter>
-            <Sidebar hasHeader hasFooter sx={styles.main}>
+        <PageLayout hasHeader>
+            <Sidebar hasHeader sx={styles.main}>
                 <Typography variant="h3" align="center" gutterBottom>Subscriptions</Typography>
                 {errorButtonVisible && (
                     <Alert
