@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import * as styles from './Subscriptions.styles'
+import SubscriptionCard from "./components/SubscriptionCard";
 import {useFetching} from "../../../hooks/useFetching";
 import SubscriptionService from "../../../api/SubscriptionService";
 import PageLayout from "../../../components/common/layout/page-layout/PageLayout";
+import Sidebar from "../../../components/common/layout/sidebar/Sidebar";
 import {
     Alert,
     Box,
@@ -29,9 +31,7 @@ import {
 import {Controller, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {string, z} from "zod";
-import SubscriptionCard from "./components/SubscriptionCard";
 import {Add} from "@mui/icons-material";
-import Sidebar from "../../../components/common/layout/sidebar/Sidebar";
 
 const Subscriptions = () => {
     const [subscriptions, setSubscriptions] = useState([])
@@ -142,7 +142,9 @@ const Subscriptions = () => {
     return (
         <PageLayout hasHeader>
             <Sidebar hasHeader sx={styles.main}>
-                <Typography variant="h3" align="center" gutterBottom>Subscriptions</Typography>
+                <Typography align="center" gutterBottom fontSize={{xs: '2rem', md: '3rem'}}>
+                    Subscriptions
+                </Typography>
                 {errorButtonVisible && (
                     <Alert
                         sx={{

@@ -24,8 +24,9 @@ const MySubscriptions = () => {
     return (
         <PageLayout hasHeader>
             <Sidebar hasHeader sx={styles.main}>
-                <Typography variant="h3"
-                            mb={2}>{subscriptions.length ? 'Subscriptions' : 'Nothing here...'}</Typography>
+                <Typography align="center" gutterBottom fontSize={{xs: '2rem', md: '3rem'}}>
+                    {subscriptions.length ? 'Subscriptions' : 'Nothing here...'}
+                </Typography>
                 <Button
                     onClick={() => setBuySubscriptionDialogOpen(true)}
                     variant="contained"

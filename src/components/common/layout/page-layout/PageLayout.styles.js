@@ -16,6 +16,16 @@ export const header = {
     zIndex: 10,
 }
 
+export const main = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    height: '100%',
+    margin: 'auto',
+}
+
 export const footer = {
     width: '100%',
     // marginTop: 'auto',

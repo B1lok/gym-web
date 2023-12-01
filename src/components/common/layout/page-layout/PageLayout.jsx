@@ -12,7 +12,9 @@ const PageLayout = ({hasHeader, hasFooter, children}) => {
                     <div style={styles.header}><Header/></div>
                 </>
             }
-            {children}
+            <div style={styles.main}>
+                {children}
+            </div>
             {hasFooter &&
                 <div style={styles.footer}><Footer/></div>
             }
