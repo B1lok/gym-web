@@ -24,7 +24,7 @@ const SubscriptionPurchaseDialog = ({
                                         subscriptionPurchaseDialogOpen,
                                         setSubscriptionPurchaseDialog,
                                         subscriptionToBuy,
-                                        coaches
+                                        coaches, setDialogOpen
                                     }) => {
     const [subscriptionCreation, setSubscriptionCreation] = useState({
         coachId: '',
@@ -39,6 +39,8 @@ const SubscriptionPurchaseDialog = ({
         if ('message' in response) {
             setErrorButtonMessage(response.message)
             setErrorButtonVisible(true)
+            setSubscriptionPurchaseDialog(false)
+            setDialogOpen(false)
         } else {
             setSubscriptionPurchaseDialog(false)
         }
@@ -64,7 +66,7 @@ const SubscriptionPurchaseDialog = ({
                     severity="error"
                     sx={{
                         position: 'fixed',
-                        top: '20px',
+                        top: '200px',
                         left: '50%',
                         transform: 'translateX(-50%)',
                         zIndex: 9999

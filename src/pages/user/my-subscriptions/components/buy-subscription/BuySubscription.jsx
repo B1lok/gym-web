@@ -34,6 +34,7 @@ const BuySubscription = ({dialogOpen, setDialogOpen}) => {
                 subscriptionPurchaseDialogOpen={subscriptionPurchaseDialog}
                 setSubscriptionPurchaseDialog={setSubscriptionPurchaseDialog}
                 subscriptionToBuy={subscriptionToBuy}
+                setDialogOpen={setDialogOpen}
                 coaches={coaches}
             />
             <Dialog
