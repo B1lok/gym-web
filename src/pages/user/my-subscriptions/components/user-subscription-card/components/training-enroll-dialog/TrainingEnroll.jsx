@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react';
+import UserService from "../../../../../../../api/UserService";
+import * as styles from "../../../../../../admin/subscriptions/Subscriptions.styles";
 import {
     Alert,
     Button,
@@ -12,13 +14,11 @@ import {
     Select,
     Stack
 } from "@mui/material";
-import * as styles from "../../../admin/subscriptions/Subscriptions.styles";
-import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {LocalizationProvider, TimePicker} from "@mui/x-date-pickers";
+import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DemoContainer} from "@mui/x-date-pickers/internals/demo";
 import dayjs from "dayjs";
-import UserService from "../../../../api/UserService";
 
 const TrainingEnroll = ({
                             trainingEnrollDialogOpen,
@@ -57,21 +57,23 @@ const TrainingEnroll = ({
     useEffect(() => {
         const handleTrainingEndChange = async () => {
             if (trainingDuration !== '' && training.trainingStart !== '') {
-                const startTime = dayjs(training.trainingStart, 'HH:mm:ss');
-                const endTime = startTime.add(trainingDuration, 'hours').format('HH:mm:ss');
-                await setTraining({...training, trainingEnd: endTime});
+                const startTime = dayjs(training.trainingStart, 'HH:mm:ss')
+                const endTime = startTime.add(trainingDuration, 'hours').format('HH:mm:ss')
+                await setTraining({...training, trainingEnd: endTime})
             }
-        };
+        }
+
         handleTrainingEndChange();
-    }, [trainingDuration, training.trainingStart]);
+    }, [trainingDuration, training.trainingStart])
 
     const handleTrainingDateChange = (date) => {
         const today = dayjs(userSubscription.purchaseDate).isBefore(dayjs()) ? dayjs() : dayjs(userSubscription.purchaseDate)
         const expirationDate = dayjs(userSubscription.expirationDate);
-
         const selectedDate = dayjs(date);
 
-        if ((selectedDate.isBefore(expirationDate) || selectedDate.isSame(expirationDate)) && (selectedDate.isAfter(today) || selectedDate.isSame(today))) {
+        if ((selectedDate.isBefore(expirationDate)
+            || selectedDate.isSame(expirationDate)) && (selectedDate.isAfter(today)
+            || selectedDate.isSame(today))) {
             setTraining({...training, trainingDate: selectedDate.format('YYYY-MM-DD')});
         } else {
             setTraining({...training, trainingDate: ''});
@@ -89,7 +91,6 @@ const TrainingEnroll = ({
     const handleTrainingTimeChange = (time) => {
         const allowedStartTime = dayjs().set('hour', 8).set('minute', 0);
         const allowedEndTime = dayjs().set('hour', 18).set('minute', 0);
-
         const selectedTime = dayjs(time);
 
         if (selectedTime.isAfter(allowedStartTime) && selectedTime.isBefore(allowedEndTime)) {
@@ -103,6 +104,8 @@ const TrainingEnroll = ({
         <>
             {errorButtonVisible && (
                 <Alert
+                    onClose={() => setErrorButtonVisible(false)}
+                    severity="error"
                     sx={{
                         position: 'fixed',
                         top: '20px',
@@ -110,11 +113,10 @@ const TrainingEnroll = ({
                         transform: 'translateX(-50%)',
                         zIndex: 9999
                     }}
-                    onClose={() => setErrorButtonVisible(false)}
-                    severity="error"
                 >
                     {errorButtonMessage}
-                </Alert>)}
+                </Alert>
+            )}
             <Dialog
                 component="form"
                 onSubmit={handleTrainingEnroll}
@@ -129,20 +131,22 @@ const TrainingEnroll = ({
                     <Stack spacing={2} alignItems="center">
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DemoContainer components={['DatePicker']}>
-                                <DatePicker label="Select training day"
-                                            onChange={handleTrainingDateChange}
-                                            minDate={dayjs(userSubscription.purchaseDate).isBefore(dayjs()) ? dayjs() : dayjs(userSubscription.purchaseDate)}
-                                            maxDate={dayjs(userSubscription.expirationDate)}
+                                <DatePicker
+                                    label="Select training day"
+                                    onChange={handleTrainingDateChange}
+                                    minDate={dayjs(userSubscription.purchaseDate).isBefore(dayjs()) ? dayjs() : dayjs(userSubscription.purchaseDate)}
+                                    maxDate={dayjs(userSubscription.expirationDate)}
                                 />
                             </DemoContainer>
                         </LocalizationProvider>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DemoContainer components={['TimePicker']}>
-                                <TimePicker disabled={training.trainingDate === ''}
-                                            label="Select training time"
-                                            onChange={handleTrainingTimeChange}
-                                            minTime={dayjs().set('hour', 8)}
-                                            maxTime={dayjs().set('hour', 18)}
+                                <TimePicker
+                                    onChange={handleTrainingTimeChange}
+                                    minTime={dayjs().set('hour', 8)}
+                                    maxTime={dayjs().set('hour', 18)}
+                                    label="Select training time"
+                                    disabled={training.trainingDate === ''}
                                 />
                             </DemoContainer>
                         </LocalizationProvider>
@@ -163,9 +167,11 @@ const TrainingEnroll = ({
                 </DialogContent>
                 <DialogActions sx={styles.actions}>
                     <Button variant="outlined" onClick={handleDialogClose}>Close</Button>
-                    <Button type="submit"
-                            disabled={training.trainingDate === '' || training.trainingStart === '' || trainingDuration === ''}
-                            variant="contained">
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        disabled={training.trainingDate === '' || training.trainingStart === '' || trainingDuration === ''}
+                    >
                         Enroll
                     </Button>
                 </DialogActions>

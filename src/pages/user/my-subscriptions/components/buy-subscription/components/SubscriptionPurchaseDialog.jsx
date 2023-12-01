@@ -12,13 +12,13 @@ import {
     Select,
     Stack
 } from "@mui/material";
-import * as styles from "../../../../admin/subscriptions/Subscriptions.styles";
+import * as styles from "../../../../../admin/subscriptions/Subscriptions.styles";
 import {LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DemoContainer} from "@mui/x-date-pickers/internals/demo";
 import {DatePicker} from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
-import UserService from "../../../../../api/UserService";
+import UserService from "../../../../../../api/UserService";
 
 const SubscriptionPurchaseDialog = ({
                                         subscriptionPurchaseDialogOpen,
