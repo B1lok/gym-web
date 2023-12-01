@@ -19,8 +19,8 @@ const Dashboard = () => {
     }, []);
 
     return (
-        <PageLayout hasHeader hasFooter>
-            <Sidebar hasHeader hasFooter sx={styles.main}>
+        <PageLayout hasHeader>
+            <Sidebar hasHeader sx={styles.main}>
                 <Statistics
                     numberOfCoaches={statistic.numberOfCoaches}
                     numberOfCustomers={statistic.numberOfCustomers}

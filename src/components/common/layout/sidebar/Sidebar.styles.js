@@ -84,6 +84,11 @@ export const listItemButtonCollapse = (isSidebarOpened, theme) => ({
     color: theme.palette.info.main,
 })
 
+export const listItemButtonSignOut = (isSidebarOpened, theme) => ({
+    ...listItemButton(isSidebarOpened),
+    color: theme.palette.error.main,
+})
+
 export const listItemIcon = (isSidebarOpened) => ({
     minWidth: 0,
     marginRight: isSidebarOpened ? 3 : 'auto',
@@ -93,6 +98,11 @@ export const listItemIcon = (isSidebarOpened) => ({
 export const listItemIconCollapse = (isSidebarOpened, theme) => ({
     ...listItemIcon(isSidebarOpened),
     color: theme.palette.info.main,
+})
+
+export const listItemIconSignOut = (isSidebarOpened, theme) => ({
+    ...listItemIcon(isSidebarOpened),
+    color: theme.palette.error.main,
 })
 
 export const dialogTitle = {
@@ -107,4 +117,9 @@ export const dialogActions = {
     alignItems: 'center',
     justifyContent: 'space-evenly',
     padding: '16px 24px',
+}
+
+export const listSignOut = {
+    ...list,
+    marginTop: 'auto'
 }
