@@ -66,7 +66,6 @@ const Profile = () => {
         const response = await UserService.getSelf()
         setUserData(response.data)
         setOldEmail(response.data.email)
-        console.log(1)
     })
     const [fetchCoachData, isCoachDataLoading, CoachDataError] = useFetching(async () => {
         const response = await CoachService.getSelf()

@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import UserService from "../../../../../../api/UserService";
+import * as styles from "../../../../../admin/subscriptions/Subscriptions.styles";
 import {
     Alert,
     Button,
@@ -12,13 +14,11 @@ import {
     Select,
     Stack
 } from "@mui/material";
-import * as styles from "../../../../../admin/subscriptions/Subscriptions.styles";
 import {LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DemoContainer} from "@mui/x-date-pickers/internals/demo";
 import {DatePicker} from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
-import UserService from "../../../../../../api/UserService";
 
 const SubscriptionPurchaseDialog = ({
                                         subscriptionPurchaseDialogOpen,
@@ -49,7 +49,6 @@ const SubscriptionPurchaseDialog = ({
     const handleSubscriptionDateChange = (date) => {
         const today = dayjs();
         const afterWeekDate = dayjs().add(7, 'days');
-
         const selectedDate = dayjs(date);
 
         if ((selectedDate.isBefore(afterWeekDate) || selectedDate.isSame(afterWeekDate)) && (selectedDate.isAfter(today) || selectedDate.isSame(today))) {
@@ -63,6 +62,8 @@ const SubscriptionPurchaseDialog = ({
         <>
             {errorButtonVisible && (
                 <Alert
+                    onClose={() => setErrorButtonVisible(false)}
+                    severity="error"
                     sx={{
                         position: 'fixed',
                         top: '200px',
@@ -70,8 +71,6 @@ const SubscriptionPurchaseDialog = ({
                         transform: 'translateX(-50%)',
                         zIndex: 9999
                     }}
-                    onClose={() => setErrorButtonVisible(false)}
-                    severity="error"
                 >
                     {errorButtonMessage}
                 </Alert>)}
@@ -83,22 +82,22 @@ const SubscriptionPurchaseDialog = ({
                 keepMounted
                 noValidate
                 fullWidth
-                style={{zIndex: 500}}
             >
                 <DialogTitle align="center">Select subscription start date</DialogTitle>
                 <DialogContent sx={styles.dialogContent}>
                     <Stack spacing={2} alignItems="center">
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DemoContainer components={['DatePicker']}>
-                                <DatePicker sx={{zIndex: 1000}} label="Select training day"
-                                            onChange={handleSubscriptionDateChange}
-                                            minDate={dayjs()}
-                                            maxDate={dayjs().add(7, 'days')}
+                                <DatePicker
+                                    onChange={handleSubscriptionDateChange}
+                                    minDate={dayjs()}
+                                    maxDate={dayjs().add(7, 'days')}
+                                    label="Select training day"
                                 />
                             </DemoContainer>
                         </LocalizationProvider>
                         {subscriptionToBuy.withCoach ? (
-                            <FormControl variant="standard" required sx={{width: '50%', zIndex: 1000}}>
+                            <FormControl variant="standard" required sx={{width: '50%'}}>
                                 <InputLabel id="coach-label">Select coach</InputLabel>
                                 <Select
                                     value={subscriptionCreation.coachId}
@@ -108,23 +107,26 @@ const SubscriptionPurchaseDialog = ({
                                     labelId="coach-label"
                                     label="Coach"
                                 >
-                                    {coaches.filter(coach => coach.specialization === subscriptionToBuy.subscriptionType)
-                                        .map(coach => (
-                                            <MenuItem
-                                                key={coach.id}
-                                                value={coach.id}>{`${coach.coachFirstName} ${coach.coachLastName}`}</MenuItem>
-                                        ))}
+                                    {coaches.filter(coach => coach.specialization === subscriptionToBuy.subscriptionType).map(coach => (
+                                        <MenuItem
+                                            key={coach.id}
+                                            value={coach.id}>{`${coach.coachFirstName} ${coach.coachLastName}`}
+                                        </MenuItem>
+                                    ))}
                                 </Select>
                             </FormControl>
                         ) : null}
                     </Stack>
                 </DialogContent>
                 <DialogActions sx={styles.actions}>
-                    <Button variant="outlined" onClick={() => setSubscriptionPurchaseDialog(false)}>Close</Button>
-                    <Button type="submit"
-                            variant="contained"
-                            disabled={subscriptionCreation.purchaseDate === ''
-                                || (subscriptionToBuy.withCoach && subscriptionCreation.coachId === '')}>
+                    <Button variant="outlined" onClick={() => setSubscriptionPurchaseDialog(false)}>
+                        Close
+                    </Button>
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        disabled={subscriptionCreation.purchaseDate === ''
+                            || subscriptionToBuy.withCoach && subscriptionCreation.coachId === ''}>
                         Buy
                     </Button>
                 </DialogActions>

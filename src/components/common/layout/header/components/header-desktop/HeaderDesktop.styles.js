@@ -12,6 +12,27 @@ export const headerContainer = {
     // boxShadow: 'unset',
 }
 
-export const tabs = {
+export const list = {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 4,
+}
 
+export const listItem = {
+    padding: 0
+}
+
+export const listItemText = {
+    textAlign: 'center',
+    color: 'black',
+}
+
+export const listItemButton = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '64px',
+    minWidth: '128px',
 }
