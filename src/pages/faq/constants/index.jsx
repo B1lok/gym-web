@@ -1,18 +1,34 @@
 export const FAQ_QUESTIONS = [
     {
-        title: 'Phasellus ultricies massa eu diam aliquet, sit amet consequat elit porta.',
-        text: 'Proin lectus enim, egestas sit amet nibh eget, laoreet malesuada ante. Quisque accumsan id leo at volutpat. Proin eget lacus erat. Cras vel dapibus nunc. Vivamus quis auctor dui, nec euismod tellus. Nam fringilla, nisl non rhoncus dictum, arcu risus vestibulum ligula, eu pretium lacus nunc at dolor. Nulla finibus imperdiet nulla id pellentesque. In suscipit consequat erat, id varius tortor lacinia eu. Fusce eu urna est. Quisque ac feugiat mauris. Sed sagittis finibus metus. Ut sed est vitae odio lobortis consequat. Etiam quis finibus ligula.'
+        title: 'What types of fitness classes do you offer at the gym?',
+        text: 'Our gym provides a diverse range of fitness classes, including but not limited to cardio workouts, strength training, yoga, and high-intensity interval training (HIIT). Check our class schedule for more details on specific offerings.'
     },
     {
-        title: 'In non magna vel turpis placerat pellentesque nec non velit.',
-        text: 'Vestibulum a lorem aliquam, sollicitudin mi in, commodo libero. Phasellus consectetur viverra diam, nec consequat ipsum feugiat at. Duis a urna vel sapien malesuada lacinia. Sed at viverra orci, nec porta arcu. Suspendisse pretium facilisis odio in pharetra. In tristique sollicitudin erat, vel tincidunt nisl porttitor a. Ut at libero ullamcorper, facilisis arcu vel, tincidunt ante. Quisque quis purus vitae nibh dapibus molestie ac a ex. Quisque eget tincidunt metus. Pellentesque luctus leo at tellus interdum ornare. Proin vitae commodo nisi.'
+        title: 'How can I sign up for a gym membership?',
+        text: 'Signing up for a gym membership is easy! Visit our website to fill out the online registration form, or drop by our front desk during business hours for assistance. Our staff is ready to help you choose the membership plan that suits your fitness goals.'
     },
     {
-        title: 'Donec scelerisque sapien eu mattis aliquam.',
-        text: 'Vivamus ullamcorper, felis sit amet pellentesque egestas, nisl dui mattis elit, vestibulum elementum ipsum leo sed turpis. In ipsum massa, vestibulum in laoreet nec, ornare ut est. Donec congue iaculis justo nec feugiat. Praesent mollis leo accumsan nulla interdum, eget consequat nunc iaculis. Praesent lorem nunc, aliquam sit amet malesuada id, faucibus vel dolor. Praesent cursus ut arcu vel rhoncus. Aliquam viverra odio nulla, vestibulum eleifend mi ultricies commodo.'
+        title: 'Are personal trainers available, and how do I book a session?',
+        text: 'Yes, we offer personal training sessions with certified trainers. To book a session, you can either visit the gym in person or use our online booking system. Our trainers will work with you to create a personalized fitness plan tailored to your needs.'
     },
     {
-        title: 'Sed id ipsum sed urna ultricies viverra at faucibus tortor.',
-        text: 'Integer tincidunt auctor facilisis. Duis vel finibus erat, nec sollicitudin odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin quis faucibus augue, nec finibus odio. Pellentesque feugiat risus ligula, in ultricies libero laoreet nec. Phasellus ultricies quis nisl eu ultricies. Nunc et interdum ex. Maecenas tempus pulvinar nisi. Nulla lacinia vitae purus et luctus. Maecenas rutrum rhoncus leo, ut tristique justo vulputate non.'
+        title: 'What amenities does the gym provide?',
+        text: 'Our gym is equipped with state-of-the-art facilities, including a variety of workout equipment, locker rooms, showers, and a dedicated space for group classes. We strive to create a comfortable and motivating environment for our members.'
+    },
+    {
+        title: 'Do you offer nutrition guidance as part of your services?',
+        text: 'Yes, we understand the importance of nutrition in achieving fitness goals. Our gym provides nutrition guidance through workshops and personalized consultations. Speak to our staff or trainers for more information on incorporating a balanced diet into your fitness journey.'
+    },
+    {
+        title: 'Can I bring a friend to work out with me?',
+        text: 'Absolutely! We encourage a sense of community at our gym. Many of our membership plans allow you to bring a friend as a workout buddy. Check our membership options for details on guest privileges.'
+    },
+    {
+        title: 'Are there fitness programs for beginners?',
+        text: 'Yes, we cater to individuals of all fitness levels, including beginners. Our trainers can guide you through introductory workouts and help you gradually build your strength and stamina. Join one of our beginner-friendly classes to get started.'
+    },
+    {
+        title: 'What is the cancellation policy for classes or personal training sessions?',
+        text: 'We understand that plans can change. Please refer to our cancellation policy for specific details on canceling classes or personal training sessions. Our goal is to accommodate your schedule while ensuring fairness to all members.'
     },
 ]
