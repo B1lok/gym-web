@@ -45,7 +45,7 @@ const SignUp = () => {
         control
     } = useForm({
         mode: 'onTouched',
-        // resolver: zodResolver(signUpSchema)
+        resolver: zodResolver(signUpSchema)
     })
 
     const onSubmit = async (data) => {
