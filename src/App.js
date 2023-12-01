@@ -22,7 +22,8 @@ function App() {
         <AuthContext.Provider value={{
             isAuth, setIsAuth,
             token, setToken,
-            roles, setRoles, isLoading
+            roles, setRoles,
+            isLoading, setIsLoading
         }}>
             <BrowserRouter>
                 <AppRouter/>

@@ -18,6 +18,6 @@ export const header = {
 
 export const footer = {
     width: '100%',
-    marginTop: 'auto',
+    // marginTop: 'auto',
     zIndex: 10,
 }

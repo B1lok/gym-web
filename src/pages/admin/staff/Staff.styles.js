@@ -1,7 +1,6 @@
 export const main = {
     width: '100%',
     gap: '8px',
-    // overflow: 'auto',
 }
 
 export const alert = {

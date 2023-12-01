@@ -54,6 +54,7 @@ export const sidebar = {
     zIndex: 1,
     display: 'flex',
     maxWidth: '100%',
+    margin: 'auto',
 }
 
 export const divider = (isSidebarOpened) => ({
@@ -93,3 +94,17 @@ export const listItemIconCollapse = (isSidebarOpened, theme) => ({
     ...listItemIcon(isSidebarOpened),
     color: theme.palette.info.main,
 })
+
+export const dialogTitle = {
+    textAlign: 'center',
+    fontSize: '24px',
+    fontWeight: 'bold',
+}
+
+export const dialogActions = {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    padding: '16px 24px',
+}

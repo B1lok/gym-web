@@ -98,7 +98,9 @@ const Customers = () => {
                 <MyTable
                     rows={customers}
                     columns={CUSTOMER_COLUMNS(handleClickOpen, setSelectedCustomerId, setCoachDialogOpen, setAdminDialogOpen)}
-                    height="40vh"
+                    text={'Customers'}
+                    textSize={25}
+                    height="70vh"
                 />
                 {errorButtonVisible && (
                     <Alert

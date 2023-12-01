@@ -4,21 +4,32 @@ import {DEFAULT_TABS, TABS} from "./constants";
 import {AuthContext} from "../../../../context/authContext";
 import {
     Box,
+    Button,
     Chip,
     CssBaseline,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
     Divider,
     List,
     ListItem,
     ListItemButton,
     ListItemIcon,
     ListItemText,
+    Slide,
     useTheme
 } from "@mui/material";
-import {ChevronLeft, ChevronRight} from '@mui/icons-material';
+import {ChevronLeft, ChevronRight, Logout} from '@mui/icons-material';
+import {useNavigate} from "react-router-dom";
+import {signOut} from "../../../../utils/utils";
 
 const Sidebar = ({hasHeader, hasFooter, sx, children}) => {
+    const {setIsAuth, setToken, setRoles} = useContext(AuthContext)
+    const navigate = useNavigate()
     const theme = useTheme();
     const [isSidebarOpened, setIsSidebarOpened] = useState(false)
+    const [isSignOutDialogOpened, setIsSignOutDialogOpened] = useState(false)
     const {roles} = useContext(AuthContext)
     const filteredTabs = TABS.filter(tab => roles.includes(tab.role))
 
@@ -29,6 +40,14 @@ const Sidebar = ({hasHeader, hasFooter, sx, children}) => {
 
     const handleSidebar = () => {
         setIsSidebarOpened(isSidebarOpened => !isSidebarOpened)
+    }
+
+    const handleSignOutDialog = () => {
+        setIsSignOutDialogOpened(isSignOutDialogOpened => !isSignOutDialogOpened)
+    }
+
+    const handleSignOut = () => {
+        signOut(navigate, setIsAuth, setToken, setRoles)
     }
 
     return (
@@ -70,9 +89,39 @@ const Sidebar = ({hasHeader, hasFooter, sx, children}) => {
                         </List>
                     </>
                 ))}
+                <List sx={styles.list} mt={'auto'}>
+                    <ListItem disablePadding sx={styles.listItem}>
+                        <ListItemButton
+                            onClick={handleSignOutDialog}
+                            sx={{color: 'red'}}
+                        >
+                            <ListItemIcon
+                                sx={{color: 'red'}}
+                            >
+                                <Logout/>
+                            </ListItemIcon>
+                            <ListItemText primary="Sign out" sx={{opacity: isSidebarOpened ? 1 : 0}}/>
+                        </ListItemButton>
+                    </ListItem>
+                </List>
+                <Dialog
+                    open={isSignOutDialogOpened}
+                    onClose={handleSignOutDialog}
+                    TransitionComponent={Slide}
+                >
+                    <DialogTitle sx={styles.dialogTitle}>
+                        Are you sure?
+                    </DialogTitle>
+                    <DialogContent>
+                    </DialogContent>
+                    <DialogActions sx={styles.dialogActions}>
+                        <Button onClick={handleSignOutDialog}>Cancel</Button>
+                        <Button onClick={handleSignOut} autoFocus>Sign out</Button>
+                    </DialogActions>
+                </Dialog>
                 {hasFooter && <styles.SidebarDrawerSpacer/>}
             </styles.SidebarDrawer>
-            <Box component="main" padding="32px" sx={sx}>
+            <Box component="main" padding="32px" overflow="auto" sx={sx}>
                 {children}
             </Box>
         </Box>

@@ -13,7 +13,7 @@ import {
     DialogActions,
     DialogContent,
     DialogContentText,
-    DialogTitle,
+    DialogTitle, Divider,
     FormControl,
     IconButton,
     InputLabel,
@@ -105,7 +105,6 @@ const Staff = () => {
     return (
         <PageLayout hasHeader>
             <Sidebar hasHeader sx={styles.main}>
-                <Typography variant="h3" align="center">Gym staff</Typography>
                 {errorButtonVisible && (
                     <Alert
                         onClose={() => setErrorButtonVisible(false)}
@@ -115,17 +114,20 @@ const Staff = () => {
                         {errorButtonMessage}
                     </Alert>
                 )}
-                <Typography variant="h3">Admins</Typography>
                 <MyTable
                     rows={admins}
                     columns={ADMIN_COLUMNS(setAdminIdToRemove, setAdminDialogOpen)}
-                    height="40vh"
+                    text={'Admins'}
+                    textSize={25}
+                    height="30vh"
+                    mb={3}
                 />
-                <Typography variant="h3" mt={2}>Coaches</Typography>
                 <MyTable
                     rows={coaches}
                     columns={COACH_COLUMNS(handleCoachDialog, handleRemovingCoachDialog)}
-                    height="40vh"
+                    text={'Coaches'}
+                    textSize={25}
+                    height="30vh"
                 />
                 <Dialog
                     open={adminDialogOpen}

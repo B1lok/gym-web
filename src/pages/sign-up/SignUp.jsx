@@ -195,7 +195,7 @@ const SignUp = () => {
                         </Grid>
                     </Grid>
                     {errors.root?.serverError &&
-                        <Alert severity={"error"}>{errors.root.serverError?.type ?? 'Unknown error'}</Alert>}
+                        <Alert severity={"error"}>{errors.root.serverError?.type ?? errors.root.serverError?.type ?? 'Unknown error'}</Alert>}
                 </Box>
             </Box>
         </Container>
