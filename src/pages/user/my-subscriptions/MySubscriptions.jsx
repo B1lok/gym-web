@@ -2,9 +2,8 @@ import React, {useEffect, useState} from 'react';
 import * as styles from "./MySubscriptions.styles";
 import {useFetching} from "../../../hooks/useFetching";
 import UserService from "../../../api/UserService";
-import {useNavigate} from "react-router-dom";
-import UserSubscriptionCard from "./components/UserSubscriptionCard";
-import BuySubscription from "./buySubscription/BuySubscription";
+import UserSubscriptionCard from "./components/user-subscription-card/UserSubscriptionCard";
+import BuySubscription from "./components/buy-subscription/BuySubscription";
 import PageLayout from "../../../components/common/layout/page-layout/PageLayout";
 import Sidebar from "../../../components/common/layout/sidebar/Sidebar";
 import {Button, Grid, Typography} from "@mui/material";
@@ -12,7 +11,6 @@ import {Add} from "@mui/icons-material";
 
 const MySubscriptions = () => {
     const [subscriptions, setSubscriptions] = useState([])
-    const navigate = useNavigate()
     const [buySubscriptionDialogOpen, setBuySubscriptionDialogOpen] = useState(false)
     const [fetchSubscriptions, isLoading, subscriptionsError] = useFetching(async () => {
         const response = await UserService.getMySubscriptions()
@@ -26,7 +24,9 @@ const MySubscriptions = () => {
     return (
         <PageLayout hasHeader>
             <Sidebar hasHeader sx={styles.main}>
-                <Typography variant="h3" mb={2}>{subscriptions.length ? 'Subscriptions' : 'Nothing here...'}</Typography>
+                <Typography align="center" gutterBottom fontSize={{xs: '2rem', md: '3rem'}}>
+                    {subscriptions.length ? 'Subscriptions' : 'Nothing here...'}
+                </Typography>
                 <Button
                     onClick={() => setBuySubscriptionDialogOpen(true)}
                     variant="contained"

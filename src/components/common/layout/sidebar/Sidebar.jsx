@@ -61,12 +61,10 @@ const Sidebar = ({hasHeader, hasFooter, sx, children}) => {
                             onClick={handleSidebar}
                             sx={styles.listItemButtonCollapse(isSidebarOpened, theme)}
                         >
-                            <ListItemIcon
-                                sx={styles.listItemIconCollapse(isSidebarOpened, theme)}
-                            >
+                            <ListItemIcon sx={styles.listItemIconCollapse(isSidebarOpened, theme)}>
                                 {isSidebarOpened ? <ChevronLeft/> : <ChevronRight/>}
                             </ListItemIcon>
-                            <ListItemText primary="Collapse" sx={{opacity: isSidebarOpened ? 1 : 0}}/>
+                            {isSidebarOpened && <ListItemText primary="Collapse"/>}
                         </ListItemButton>
                     </ListItem>
                 </List>
@@ -78,8 +76,8 @@ const Sidebar = ({hasHeader, hasFooter, sx, children}) => {
                         <List sx={styles.list}>
                             {tabContent.tab.map((listItem, index) => (
                                 <ListItem key={index} disablePadding sx={styles.listItem}>
-                                    <ListItemButton href={listItem.link} sx={styles.listItemButton}>
-                                        <ListItemIcon sx={styles.listItemIcon}>
+                                    <ListItemButton href={listItem.link} sx={styles.listItemButton(isSidebarOpened)}>
+                                        <ListItemIcon sx={styles.listItemIcon(isSidebarOpened)}>
                                             {listItem.icon}
                                         </ListItemIcon>
                                         {isSidebarOpened && <ListItemText primary={listItem.title}/>}
@@ -89,18 +87,16 @@ const Sidebar = ({hasHeader, hasFooter, sx, children}) => {
                         </List>
                     </>
                 ))}
-                <List sx={styles.list} mt={'auto'}>
+                <List sx={styles.listSignOut}>
                     <ListItem disablePadding sx={styles.listItem}>
                         <ListItemButton
                             onClick={handleSignOutDialog}
-                            sx={{color: 'red'}}
+                            sx={styles.listItemButtonSignOut(isSidebarOpened, theme)}
                         >
-                            <ListItemIcon
-                                sx={{color: 'red'}}
-                            >
+                            <ListItemIcon sx={styles.listItemIconSignOut(isSidebarOpened, theme)}>
                                 <Logout/>
                             </ListItemIcon>
-                            <ListItemText primary="Sign out" sx={{opacity: isSidebarOpened ? 1 : 0}}/>
+                            {isSidebarOpened && <ListItemText primary="Sign out"/>}
                         </ListItemButton>
                     </ListItem>
                 </List>
@@ -112,8 +108,7 @@ const Sidebar = ({hasHeader, hasFooter, sx, children}) => {
                     <DialogTitle sx={styles.dialogTitle}>
                         Are you sure?
                     </DialogTitle>
-                    <DialogContent>
-                    </DialogContent>
+                    <DialogContent></DialogContent>
                     <DialogActions sx={styles.dialogActions}>
                         <Button onClick={handleSignOutDialog}>Cancel</Button>
                         <Button onClick={handleSignOut} autoFocus>Sign out</Button>

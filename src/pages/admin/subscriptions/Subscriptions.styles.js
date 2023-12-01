@@ -1,5 +1,5 @@
 export const main = {
-    padding: '0px 32px 64px 32px'
+    paddingBottom: "64px"
 }
 
 export const addIcon = {

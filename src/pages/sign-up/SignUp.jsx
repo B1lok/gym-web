@@ -1,14 +1,15 @@
 import React, {useContext} from 'react';
+import * as styles from './SignUp.styles';
 import {useNavigate} from "react-router-dom";
-import {MAIN_ROUTE, SIGNIN_ROUTE} from "../../utils/constants";
+import {SIGNIN_ROUTE} from "../../utils/constants";
 import {AuthContext} from "../../context/authContext";
 import AuthService from "../../api/AuthService";
-import {jwtDecode} from "jwt-decode";
 import {Alert, Box, Button, Container, CssBaseline, Grid, Link, TextField, Typography} from '@mui/material';
 import {Controller, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {string, z} from "zod";
 import InputMask from "react-input-mask";
+import {signIn} from "../../utils/utils";
 
 const SignUp = () => {
     const navigate = useNavigate()
@@ -38,11 +39,10 @@ const SignUp = () => {
         })
 
     const {
-        register,
+        control,
         handleSubmit,
         formState: {errors},
         setError,
-        control
     } = useForm({
         mode: 'onTouched',
         resolver: zodResolver(signUpSchema)
@@ -69,56 +69,56 @@ const SignUp = () => {
             return
         }
 
-        setIsAuth(true)
-        localStorage.setItem('auth', 'true')
-        setToken(signInResponse.data.token)
-        localStorage.setItem('token', signInResponse.data.token)
-
-        const decodedJwt = jwtDecode(signInResponse.data.token)
-        setRoles(decodedJwt.roles)
-        localStorage.setItem('roles', JSON.stringify(decodedJwt.roles))
-        navigate(MAIN_ROUTE)
+        signIn(navigate, setIsAuth, setToken, setRoles, signInResponse.data.token)
     }
 
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
             <Box
-                sx={{
-                    display: 'flex',
-                    minHeight: '100vh',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}
+                sx={styles.main}
             >
-                <Typography component="h1" variant="h5">
+                <Typography component="h1" variant="h4">
                     Sign up
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{mt: 2}}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
-                            <TextField
-                                {...register('firstName')}
-                                error={Boolean(errors.firstName)}
-                                helperText={errors.firstName?.message}
-                                id="firstName"
-                                label="First Name"
-                                autoComplete="given-name"
-                                required
-                                fullWidth
+                            <Controller
+                                name="firstName"
+                                control={control}
+                                defaultValue=""
+                                render={({field, fieldState: {error}}) => (
+                                    <TextField
+                                        {...field}
+                                        error={Boolean(error)}
+                                        helperText={error?.message}
+                                        id="firstName"
+                                        label="First Name"
+                                        autoComplete="given-name"
+                                        required
+                                        fullWidth
+                                    />
+                                )}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField
-                                {...register('lastName')}
-                                error={Boolean(errors.lastName)}
-                                helperText={errors.lastName?.message}
-                                id="lastName"
-                                label="Last Name"
-                                autoComplete="family-name"
-                                required
-                                fullWidth
+                            <Controller
+                                name="lastName"
+                                control={control}
+                                defaultValue=""
+                                render={({field, fieldState: {error}}) => (
+                                    <TextField
+                                        {...field}
+                                        error={Boolean(error)}
+                                        helperText={error?.message}
+                                        id="lastName"
+                                        label="Last Name"
+                                        autoComplete="family-name"
+                                        required
+                                        fullWidth
+                                    />
+                                )}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -126,11 +126,9 @@ const SignUp = () => {
                                 name="phoneNumber"
                                 control={control}
                                 defaultValue=""
-                                render={({field: {value, onChange, onBlur}, fieldState: {error}}) => (
+                                render={({field, fieldState: {error}}) => (
                                     <InputMask
-                                        value={value}
-                                        onChange={onChange}
-                                        onBlur={onBlur}
+                                        {...field}
                                         mask="+38(099)999-99-99"
                                     >
                                         {() => <TextField
@@ -147,40 +145,61 @@ const SignUp = () => {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField
-                                {...register('email')}
-                                error={Boolean(errors.email)}
-                                helperText={errors.email?.message}
-                                id="email"
-                                label="Email Address"
-                                autoComplete="email"
-                                required
-                                fullWidth
+                            <Controller
+                                name="email"
+                                control={control}
+                                defaultValue=""
+                                render={({field, fieldState: {error}}) => (
+                                    <TextField
+                                        {...field}
+                                        error={Boolean(error)}
+                                        helperText={error?.message}
+                                        id="email"
+                                        label="Email"
+                                        autoComplete="email"
+                                        required
+                                        fullWidth
+                                    />
+                                )}
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField
-                                {...register('password')}
-                                error={Boolean(errors.password)}
-                                helperText={errors.password?.message}
-                                id="password"
-                                label="Password"
-                                type="password"
-                                autoComplete="new-password"
-                                required
-                                fullWidth
+                            <Controller
+                                name="password"
+                                control={control}
+                                defaultValue=""
+                                render={({field, fieldState: {error}}) => (
+                                    <TextField
+                                        {...field}
+                                        error={Boolean(error)}
+                                        helperText={error?.message}
+                                        id="password"
+                                        label="Password"
+                                        type="password"
+                                        autoComplete="new-password"
+                                        required
+                                        fullWidth
+                                    />
+                                )}
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField
-                                {...register('confirmPassword')}
-                                error={Boolean(errors.confirmPassword)}
-                                helperText={errors.confirmPassword?.message}
-                                id="confirm-password"
-                                label="Confirm password"
-                                type="password"
-                                required
-                                fullWidth
+                            <Controller
+                                name="confirmPassword"
+                                control={control}
+                                defaultValue=""
+                                render={({field, fieldState: {error}}) => (
+                                    <TextField
+                                        {...field}
+                                        error={Boolean(error)}
+                                        helperText={error?.message}
+                                        id="confirm-password"
+                                        label="Confirm password"
+                                        type="password"
+                                        required
+                                        fullWidth
+                                    />
+                                )}
                             />
                         </Grid>
                     </Grid>
@@ -195,7 +214,8 @@ const SignUp = () => {
                         </Grid>
                     </Grid>
                     {errors.root?.serverError &&
-                        <Alert severity={"error"}>{errors.root.serverError?.type ?? errors.root.serverError?.type ?? 'Unknown error'}</Alert>}
+                        <Alert severity={"error"}>{errors.root.serverError?.type ?? 'Unknown error'}</Alert>
+                    }
                 </Box>
             </Box>
         </Container>
