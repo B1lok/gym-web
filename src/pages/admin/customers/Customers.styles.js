@@ -1,6 +1,5 @@
 export const main = {
     width: '100%',
-    // maxWidth: '90%'
 }
 
 export const alert = {

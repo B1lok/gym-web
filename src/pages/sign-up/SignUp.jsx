@@ -45,7 +45,7 @@ const SignUp = () => {
         control
     } = useForm({
         mode: 'onTouched',
-        resolver: zodResolver(signUpSchema)
+        // resolver: zodResolver(signUpSchema)
     })
 
     const onSubmit = async (data) => {
@@ -195,7 +195,7 @@ const SignUp = () => {
                         </Grid>
                     </Grid>
                     {errors.root?.serverError &&
-                        <Alert severity={"error"}>{errors.root.serverError?.type ?? 'Unknown error'}</Alert>}
+                        <Alert severity={"error"}>{errors.root.serverError?.type ?? errors.root.serverError?.type ?? 'Unknown error'}</Alert>}
                 </Box>
             </Box>
         </Container>

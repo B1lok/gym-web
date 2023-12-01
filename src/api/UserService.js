@@ -12,6 +12,17 @@ export default class UserService {
         return await axios.get(`${USER_API_URL}/self`, {headers})
     }
 
+    static async updateSelf(data) {
+        try {
+            return await axios.patch(`${USER_API_URL}/self`, data, {headers})
+        } catch (e) {
+            if (!e.response) return {message: "No server response"}
+            else if (e.response.status === 400) return {message: e.response.data.message}
+            else if (e.response.status === 403) return {message: e.response.data.message}
+            else return {message: "Error happened"}
+        }
+    }
+
     static async getMySubscriptions() {
         return await axios.get(`${USER_API_URL}/mySubscriptions`, {headers})
     }
@@ -30,6 +41,7 @@ export default class UserService {
         } catch (e) {
             if (!e.response) return {message: "No server response"}
             else if (e.response.status === 403) return {message: "You can not cancel this record"}
+            else return {message: "Error happened"}
         }
     }
 
@@ -39,6 +51,7 @@ export default class UserService {
         } catch (e) {
             if (!e.response) return {message: "No server response"}
             else if (e.response.status === 403) return {message: "You can not cancel this record"}
+            else return {message: "Error happened"}
         }
     }
 
@@ -48,7 +61,7 @@ export default class UserService {
         } catch (e) {
             if (!e.response) return {message: "No server response"}
             else if (e.response.status === 403) return {message: "You already have this type of subscription"}
+            else return {message: "Error happened"}
         }
     }
-
 }
