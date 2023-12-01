@@ -1,14 +1,16 @@
 import React, {useEffect, useState} from 'react';
+import * as styles from "./MySubscriptions.styles";
 import {useFetching} from "../../../hooks/useFetching";
 import UserService from "../../../api/UserService";
-import {Box, Button, Grid} from "@mui/material";
-import {Add} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
 import UserSubscriptionCard from "./components/UserSubscriptionCard";
 import BuySubscription from "./buySubscription/BuySubscription";
+import PageLayout from "../../../components/common/layout/page-layout/PageLayout";
+import Sidebar from "../../../components/common/layout/sidebar/Sidebar";
+import {Button, Grid, Typography} from "@mui/material";
+import {Add} from "@mui/icons-material";
 
 const MySubscriptions = () => {
-
     const [subscriptions, setSubscriptions] = useState([])
     const navigate = useNavigate()
     const [buySubscriptionDialogOpen, setBuySubscriptionDialogOpen] = useState(false)
@@ -22,27 +24,32 @@ const MySubscriptions = () => {
     }, []);
 
     return (
-        <Box m="20px" sx={{textAlign: 'center'}}>
-            <h1>My Subscriptions</h1>
-            <Button size="large" variant="contained"
-                    color="success" onClick={() => setBuySubscriptionDialogOpen(true)}
-                    sx={{marginTop: '15px'}}>
-                Buy new subscription
-                <Add sx={{marginLeft: '5px'}}></Add>
-            </Button>
-            <Grid container spacing={3} mt="20px">
-                {subscriptions.map(subscription => (
-                    <Grid key={subscription.id} item xs={12} sm={6}>
-                        <UserSubscriptionCard key={subscription.id}
-                                              userSubscription={subscription}
-                                              fetchSubscriptions={fetchSubscriptions}
-                        ></UserSubscriptionCard>
-                    </Grid>
-                ))}
-            </Grid>
-            <BuySubscription dialogOpen={buySubscriptionDialogOpen} setDialogOpen={setBuySubscriptionDialogOpen}/>
-
-        </Box>
+        <PageLayout hasHeader>
+            <Sidebar hasHeader sx={styles.main}>
+                <Typography variant="h3" mb={2}>{subscriptions.length ? 'Subscriptions' : 'Nothing here...'}</Typography>
+                <Button
+                    onClick={() => setBuySubscriptionDialogOpen(true)}
+                    variant="contained"
+                    size="large"
+                    color="success"
+                    endIcon={<Add/>}
+                >
+                    Buy new subscription
+                </Button>
+                <Grid container spacing={3} mt="20px" columns={{xs: 4, sm: 8, md: 12}}>
+                    {subscriptions.map(subscription => (
+                        <Grid key={subscription.id} item xs={12} sm={6} lg={4}>
+                            <UserSubscriptionCard
+                                key={subscription.id}
+                                userSubscription={subscription}
+                                fetchSubscriptions={fetchSubscriptions}
+                            />
+                        </Grid>
+                    ))}
+                </Grid>
+                <BuySubscription dialogOpen={buySubscriptionDialogOpen} setDialogOpen={setBuySubscriptionDialogOpen}/>
+            </Sidebar>
+        </PageLayout>
     );
 };
 

@@ -1,5 +1,4 @@
 export const main = {
-    width: '100%',
     gap: '8px',
 }
 

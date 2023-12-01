@@ -127,7 +127,7 @@ const Staff = () => {
                     columns={COACH_COLUMNS(handleCoachDialog, handleRemovingCoachDialog)}
                     text={'Coaches'}
                     textSize={25}
-                    height="30vh"
+                    height="40vh"
                 />
                 <Dialog
                     open={adminDialogOpen}

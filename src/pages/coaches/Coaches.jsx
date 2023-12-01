@@ -38,10 +38,12 @@ const Coaches = () => {
             <Container sx={{py: 8}} maxWidth="md">
                 <Grid container spacing={4}>
                     {coaches.map((coach, index) => (
-                        <CoachCard key={index}
-                                   coach={coach}
-                                   setSelectedCoach={setSelectedCoach}
-                                   setCoachDialog={setCoachDialog}/>
+                        <CoachCard
+                            key={index}
+                            coach={coach}
+                            setSelectedCoach={setSelectedCoach}
+                            setCoachDialog={setCoachDialog}
+                        />
                     ))}
                 </Grid>
             </Container>

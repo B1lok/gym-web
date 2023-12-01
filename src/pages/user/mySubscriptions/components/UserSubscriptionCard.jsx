@@ -1,4 +1,9 @@
 import React, {useState} from 'react';
+import {RunCircle, Straight} from "@mui/icons-material";
+import {useFetching} from "../../../../hooks/useFetching";
+import UserService from "../../../../api/UserService";
+import UserTrainingsGrid from "./UserTrainingsGrid";
+import TrainingEnroll from "./TrainingEnroll";
 import {
     Button,
     Card,
@@ -12,12 +17,7 @@ import {
     Slide,
     Typography
 } from "@mui/material";
-import {RunCircle, Straight} from "@mui/icons-material";
 import {GridCloseIcon} from "@mui/x-data-grid";
-import {useFetching} from "../../../../hooks/useFetching";
-import UserService from "../../../../api/UserService";
-import UserTrainingsGrid from "./UserTrainingsGrid";
-import TrainingEnroll from "./TrainingEnroll";
 
 const UserSubscriptionCard = ({userSubscription, fetchSubscriptions}) => {
     const [trainingDialogOpen, setTrainingDialogOpen] = useState(false)
@@ -45,7 +45,7 @@ const UserSubscriptionCard = ({userSubscription, fetchSubscriptions}) => {
 
     return (
         <>
-            <Card sx={{borderRadius: 8, border: '1px solid #e0e0e0'}}>
+            <Card sx={{minWidth: 275, borderRadius: 8, border: '1px solid #e0e0e0', p: 0}}>
                 <CardContent>
                     <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
                         Subscription Details

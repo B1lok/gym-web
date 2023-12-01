@@ -1,10 +1,12 @@
 export const main = {
+    padding: '0px 32px 64px 32px'
 }
 
 export const addIcon = {
     position: 'fixed',
-    bottom: `${64 + 4}px`,
-    right: '4px',
+    bottom: 0,
+    right: 0,
+    zIndex: 10000,
     '& .MuiSvgIcon-root': {fontSize: '4rem'},
 }
 
