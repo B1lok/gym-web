@@ -5,7 +5,17 @@ import HeaderLogo from "../header-logo/HeaderLogo";
 import {PAGES} from "../../constants";
 import UserService from "../../../../../../api/UserService";
 import {useFetching} from "../../../../../../hooks/useFetching";
-import {AppBar, IconButton, Link, Tab, Tabs, Toolbar, Typography} from "@mui/material";
+import {
+    AppBar,
+    IconButton,
+    Link,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemText,
+    Toolbar,
+    Typography
+} from "@mui/material";
 import {AccountCircle} from "@mui/icons-material";
 
 const HeaderDesktop = ({isAuth}) => {
@@ -23,11 +33,15 @@ const HeaderDesktop = ({isAuth}) => {
         <AppBar elevation={4} sx={styles.headerContainer}>
             <HeaderLogo/>
             <Toolbar disableGutters>
-                <Tabs value={-1} sx={styles.tabs}>
+                <List sx={styles.list}>
                     {PAGES.map((page, index) => (
-                        <Tab key={index} label={page.title} href={page.link}/>
+                        <ListItem key={index} sx={styles.listItem}>
+                            <ListItemButton href={page.link} sx={styles.listItemButton}>
+                                <ListItemText primary={page.title} sx={styles.listItemText}/>
+                            </ListItemButton>
+                        </ListItem>
                     ))}
-                </Tabs>
+                </List>
             </Toolbar>
             <Toolbar disableGutters>
                 {isAuth ? (
